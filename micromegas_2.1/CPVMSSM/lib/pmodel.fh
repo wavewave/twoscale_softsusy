@@ -1,0 +1,5 @@
+       integer readVarCPVMSSM 
+       real*8 Bsmumu,Bsg,Bulnu,Bdll,ABsg,deltMd,deltMs,EDMth,EDMel,EDMmu  
+
+
+ 

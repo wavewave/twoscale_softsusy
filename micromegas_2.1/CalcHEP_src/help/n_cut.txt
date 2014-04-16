@@ -1,0 +1,26 @@
+ 3 9 72
+  This table  apples cuts on the phase space. A phase space function
+is described in the first column. Its limits are defined and the second
+and the third columns. If one of these fields is empty then a one-side
+cut is applied. 
+  The phase space function is defined by a key character and a particle
+set following this character without separators. For example, "C13" 
+means cosine of angle between the first and the third particles.
+  The following key characters are available:
+  A  - Angle  in degree units;
+  C  - Cosine of angle;
+  J  - Jet cone angle;
+  E  - Energy of the particle set;
+  M  - Mass of the particle set;
+  P  - Cosine in the rest frame of pair;
+  T  - Transverse momentum P_t  of the particle set;
+  S  - Squared mass of the particle set;
+  Y  - Rapidity of  particle set. 
+  N  - Pseudo-rapidity of particle set.
+  U  - user implemented function.
+See manual for details.
+
+ The parameter  limits van be defined  by an algebraic formula, which 
+contains numbers and identifiers enumerated in the "Model parameters" 
+menu. Parentheses  "()" and  operation "+,-,/,*,**,sqrt()" are also 
+permitted.

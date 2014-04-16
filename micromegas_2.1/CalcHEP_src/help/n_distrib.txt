@@ -1,0 +1,22 @@
+3 7 75
+  This table provides the user with a possibility to choose distributions,
+which will be filled during the Monte Carlo sessions.
+  The tested value must be described in the first column. It is defined by
+a key character and a particle set following this character. For example, 
+"C13" means cosine of angle between the first and the third particles.
+  The following key characters are available:
+  A  - Angle  in degree unit
+  C  - Cosine of angle   
+  J  - Jet cone angle    
+  E  - Energy of the particle set
+  M  - Mass of the particle set 
+  P  - Cosine in the rest frame of particles. 
+  T  - Transverse momentum P_t  of the particle set 
+  S  - Squared mass
+  Y  - Rapidity of particle set.
+  N  - Pseudo-rapidity of particle set.
+  U  - user defined function 
+See Manual for details.
+  The second and the third columns are used to define a range of the
+distribution. The ranges may be described by an algebraic formula 
+which contains numbers and CalcHEP identifiers.

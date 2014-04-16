@@ -1,0 +1,3 @@
+
+so_generated/$(lib).so:  models/*$(model).mdl
+	@rm  -f so_generated/$(lib).so 

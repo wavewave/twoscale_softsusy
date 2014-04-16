@@ -1,0 +1,26 @@
+
+This directory does not present a physical model.
+It contains  auxiliary  codes and models which where 
+used to prepare micrOMEGAs_2.1. In particular
+1) calchep/ directory contains toy models which allow to check 
+    a) a model with  basic operators;
+    b) a model with twist-2 operator;
+    c) a model with WINP-quark-squark  Yukawa interaction
+2) work/models contains a toy model which allow to check s-quark 
+co-annihilation. In particular one can see that if Msq-Mlsp <10 GeV then 
+co-annihilation ~q,~Q -> G,G puts Relic below WMAP. In its turn it means 
+that twist-2 and box diagrams are not so important in direct detection
+business.
+   main.c and data1.par are tools to play with this toy model. 
+
+3)I1test.c gives a possibility to check a factor which comes from box
+diagrams. It demonstrates that  this factor is about [1- 0.5*Mq/(Msq-Mne)].
+Compile it by 
+        make main=I1test.c
+Usage 
+       ./I1test Mq Msq Mne
+4) cFermi.c - extract Fermi half density from  data of momenta of 
+proton density. 
+5) sdFermi.c finds  Fermi half density  for spin dependent interactions
+6) sd_comp.tab.c compare results obtained by Fermi density and against  one 
+   obtained with special SD form factors. 

@@ -1,0 +1,89 @@
+# SUSY Les Houches Accord 1.0 - example input file for SUSPECT 2.3
+Block MODSEL  # Select model: 
+#            Arbitrary soft-terms at low scale               : 0
+#            Arbitrary soft-terms at high scale (large RGE)  : 1
+#            mSUGRA (cMSSM)                                  : 10
+#            GMSB   (cMSSM)                                  : 11
+#            AMSB   (cMSSM)                                  : 12
+    1   0  # general MSSM
+#
+Block SU_ALGO  # !specific SUSPECT2.3 block: algorithm control parameters
+     2    21  # 2-loop RGE (1-loop RGE is: 11 instead)
+     3    1   # 1: g_1(gut) = g_2(gut) consistently calculated from input
+#  NB other possibility is 0: High scale input (=HIGH in block EXTPAR below):
+     4    2   # RGE accuracy: 1: moderate, 2: accurate (but slower)  
+     6    0    #  1: M_Hu, M_Hd input (default in constrained models)
+#        (or 0: MA_pole, MU input instead: only possible in gen. MSSM!)
+     8    1   # if = 1: Default EWSB scale=(mt_L*mt_R)^(1/2) 
+#          if = 0: arbitrary EWSB scale (give EWSB in Block EXTPAR below) 
+     9    2   # Final spectrum accuracy: 1 -> 1% acc.; 2 -> 0.01 % acc.
+     10   2   # Higgs boson masses calculation options: 
+#             A simple approximation                            : 0
+#             One-loop calculation                              : 1
+#             One-loop  + dominant DSVZ 2-loop (recommended)    : 2
+     11   0   # Higher order Higgs 'scheme' choice in rad. corr. at mZ:
+#          RUNNING DRbar Higgs masses at loop-level at mZ (preferred!): 0
+#          POLE          Higgs masses at loop-level at mZ             : 1
+#
+Block SMINPUTS   # Standard Model inputs
+     1     127.934  # alpha_em^(-1)(MZ) SM MSbar 
+     3      0.1172  # alpha_s(MZ) SM MSbar
+     5      4.25    # Mb(mb) SM MSbar
+     6    178.      # Mtop(pole)
+     7    1.777     # Mtau(pole)
+#
+Block MINPAR  # specific model input parameters
+#   input for mSUGRA models (! comment (#) all other (GMSB,AMSB) lines):
+     1    100.0   # m0
+     2    250.0   # m1%2
+     5  -100.0    # A0
+     3     10.0   # tanbeta
+     4      1.0   # sign(mu)
+#   input for GMSB models (! comment (#) all other (mSUGRA,AMSB) lines):
+#     1    100.d3  # Lambda_susy
+#     2    200.d3  # Lambda_mess
+#     3    15      # tanbeta 
+#     4    1.      # sign(MU)
+#     5    1       # Nl_mes  
+#     6    1       # Nq_mes  
+#   input for AMSB models (! comment (#) all other (mSUGRA,GMSB) lines):
+#     1    450.    # m0
+#     2    60.d3   # M_3%2 gravitino mass
+#     3    10.     # tanbeta
+#     4    1.      # sign(MU)
+#     5    1.      # cQ  : weight of m0 for Q_L (3rd gen.) doublet 
+#     6    1.      # cuR : weight of m0 for u_R
+#     7    1.      # cdR : weight of m0 for d_R 
+#     8    1.      # cL  : weight of m0 for L (1st, 2d gen.) doublet 
+#     9    1.      # ceR : weight of m0 for e_R (1st, 2d gen.)
+#     10   1.      # cHu : weight of m0 for Hu 
+#     11   1.      # cHd : weight of m0 for Hd 
+#
+Block EXTPAR   # general MSSM input (!only 0 relevant in mSUGRA, GMSB, AMSB)
+     0   1000.0   # EWSB_scale (!only relevant if above block su_algo 8 = 0)
+#     10   2.d3   # HIGH scale (RGE end) (!only relevant if non-GUT models)
+     22   1.d4    # M^2_Hu
+     21   1.d4    # M^2_Hd
+     25   10.     # tbeta
+     26   1       # sign(mu)
+     1    167.    # M1 U(1)_Y Bino mass
+     2    333.    # M2 SU(2)_L Wino mass
+     3    1000.    # M3 SU(3)_c gluino mass
+     33   1.d3  # M_tau_L   
+     36   1.d3  # M_tau_R    
+     43   1.d3   # M_Q_L (3rd gen.)
+     46   1.d3   # M_t_R
+     49   1.d3    # M_b_R
+     31   1.d3  # M_e_L (1st, 2d gen.)
+     34   1.d3  # M_e_R (1st, 2d gen.)
+     41   1.d3    # M_qu_L  (1st, 2d gen.)
+     44   1.d3  # M_u_R (1st, 2d gen.)
+     47   1.d3  # M_d_R (1st, 2d gen.)
+     13   1.d3    # A_tau
+     11   100.01   # A_t
+     12   1.d3  # A_b
+     16   0.d3    # A_e (1st, 2d gen.)
+     14   0.d3  # A_u (1st, 2d gen.)
+     15   0.d3  # A_d (1st, 2d gen.)
+     24   1000.   # M_A(pole!)
+     23   1000.    # MU(EWSB scale)

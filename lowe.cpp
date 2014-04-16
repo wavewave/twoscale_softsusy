@@ -98,6 +98,7 @@
    Added proper header info
 */
 
+#include <cstring>
 #include "lowe.h"
 
 ///  external object temp used to get objects into external routines, however:

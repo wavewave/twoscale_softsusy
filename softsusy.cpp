@@ -671,6 +671,7 @@
    Added proper header info
 */
 
+#include <cstring>
 #include "softsusy.h"
 
 static double sw2 = 1.0 - sqr(MW / MZ),

@@ -1,0 +1,33 @@
+1. ============  read  ../README ===========
+
+2. ============ Spectrum calculation =======
+ We rely on CPsuperH for computing the spectrum.
+
+3. EDM (electric dipole moment)
+Our package contains an edm routine which  calculates 
+the electric dipole moment of electron and thallium. 
+The module is  written in C++ and requires special C++ 
+library (-lstdc++) for C and Fortran compilers. One  can meet a problem
+if C/Fortran does not find the location of this library. In this case it is
+preferable to use a C++ code omg.cpp (identical to C one). Alternatively
+if edm is not needed one can remove the call to edm in omg.c/omg.F 
+and remove the -lstdc++  compilation instruction in the Makefile.
+ 
+
+3. ======= Special citations ========
+
+%\cite{Belanger:2006qa}
+\bibitem{Belanger:2006qa}
+G.~Belanger, F.~Boudjema, S.~Kraml, A.~Pukhov and A.~Semenov,
+%``Relic density of neutralino dark matter in the MSSM with CP violation,''
+arXiv:hep-ph/0604150.
+
+CPsuperH
+%\cite{Lee:2003nt}
+\bibitem{Lee:2003nt}
+J.~S.~Lee, A.~Pilaftsis, M.~Carena, S.~Y.~Choi, M.~Drees, J.~R.~Ellis and C.~E.~M.~Wagner,
+%``CPsuperH: A computational tool for Higgs phenomenology in the minimal
+%supersymmetric standard model with explicit CP violation,''
+Comput.\ Phys.\ Commun.\  {\bf 156} (2004) 283
+[arXiv:hep-ph/0307377].
+

@@ -1,0 +1,8 @@
+ewsbNMSSM
+Libraries
+External libraries  and citation                                      <|
+../../lib/aLib.a
+../../lib/NMSSMTools_1.2.0/sources/nmhdecay.a
+../../../sources/micromegas.a
+../../work/work_aux.a  $lFort
+========================================================================

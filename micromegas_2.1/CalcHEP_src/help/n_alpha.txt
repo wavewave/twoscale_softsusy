@@ -1,0 +1,34 @@
+1 1 51
+
+1. The parton distribution tables used in CalcHEP
+can contain description of alphaQCD(Q). The first
+menu position gives to the user a possibility to
+accept/refuse the alphaQCD stored in the tables.
+ If this switch is ON, but  in the current moment
+the parton distribution table is not specified or
+doesn't contain alphaQCD, then you should see the
+symbol "?" attached to  "ON". In this case the
+alphaQCD defined by next menu items is used
+ignoring this menu item.
+
+2-4. Next three menu items define alternative
+alphaQCD function. Here nf is maximal number of
+flavors.  The actual number of flavors will
+decrease with decreasing the scale.
+  
+5.The fifth menu item defines  the dependence of
+scale Q from the phase-space point. In time of
+numerical calculations this scale is used as
+argument of alphaQCD and parton structure
+distributions. This scale can be specified as a
+constant, like Z mass (default value) or can be
+constructed from the objects defined in Section
+"Phase space functions".  For example, "M12"
+designates the CMS energy of incoming particles,
+"T3" is transverse momenta of the third particle.
+The scale smaller then 1 GeV is replaces
+automatically on 1.
+
+6. The "Alpha(Q) plot" menu function displays the
+alpha(Q) plots for the region of scale defined by
+the user.

@@ -235,6 +235,7 @@
    SoftsusyIsajetInterface, SoftsusySsrunInterface respectively.
 */
 
+#include <cstring>
 #include <softpoint.h>
 
 void extendedSugraBcs2(MssmSoftsusy & m, 

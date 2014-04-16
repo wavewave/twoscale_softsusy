@@ -1,0 +1,5 @@
+sugra&AMSB MSSM
+Libraries
+External libraries                                                  <|
+../../lib/aLib.a ../../../sources/micromegas.a ../../work/work_aux.a
+======================================================================

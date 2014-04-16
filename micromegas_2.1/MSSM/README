@@ -1,0 +1,32 @@
+1. ============  read  ../README ===========
+
+2.=================== Spectrum Calculation ======================
+By default we use SuSpect for RGE solution and calculation of particle spectrum.
+To use other RGE codes: SPHENO, SOFTSUSY,ISAJET, the user has to define  
+the corresponding variables in lib/Makefile.
+These variables have to contain the path to the corresponding package. 
+For example, 
+    SOFTSUSY=$HOME/softsusy 
+In all cases we use the SLHA file interface to pass the data.
+ 
+In the case of ISAJET, one has to make some modifications for SLHA interface. 
+For this goal one has to define path to Isajet package  and CERNLIB.
+It should be done via ISAJET and CERNLIB variables defined in 
+lib/Makefile. After that go to 'lib' subdirectory and call
+    make  isajet_slha
+The file isajet_slha  has to appear in the same directory.
+ 
+3. Example files cycle2.c and cycle5.c  are test programs which
+should reproduce Table_2 and Table_5 presented in the article.
+main.c and main.F demonstrate general facilities of micrOMEGAs. 
+ 
+4.======= Special citation ========
+If you use SuSpect please cite
+
+%\cite{Djouadi:2002ze}
+\bibitem{Djouadi:2002ze}
+A.~Djouadi, J.~L.~Kneur and G.~Moultaka,
+%``SuSpect: A Fortran code for the supersymmetric and Higgs particle spectrum in
+%the MSSM,''
+arXiv:hep-ph/0211331.
+

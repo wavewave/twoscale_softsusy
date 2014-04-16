@@ -1,0 +1,5 @@
+
+$CC $CFLAGS -o n_calchep $CALCHEP/n_calchep.o $CALCHEP/num_c.a  \
+$CALCHEP/serv.a proclib_*.a  $CALCHEP/alpha_s.$SO $EXTLIB $CALCHEP/dummy.a \
+$LX11 -lm
+
