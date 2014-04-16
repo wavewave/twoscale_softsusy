@@ -1,0 +1,24 @@
+linear
+l1  1
+l2  1
+l3  1
+nQ  0.5
+nU  0.5
+nD  0.5
+nL  0.5
+nE  0.5
+nHu 1
+nHd 1
+N   3
+numscan 1
+alpha_start 1.8
+alpha_end   1.8
+beta_start  1
+beta_end    1
+M_moduli_start 600 
+M_moduli_end   600
+M_mess_start   1e16
+M_mess_end     1e16
+tanb_start     10
+tanb_end       10
+sgnMu        +1

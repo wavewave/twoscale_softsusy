@@ -1,0 +1,17 @@
+l1  1
+l2  1
+l3  1
+nQ  0.5
+nU  0.5
+nD  0.5
+nL  0.5
+nE  0.5
+nHu 1
+nHd 1
+N   3
+alpha 1
+beta  0.0
+M_moduli 1000
+M_mess   1e12
+tanb     10
+sgnMu        +1
