@@ -8,7 +8,7 @@
 # it's probably going to have to be g++ on linux
 CC=	g++
 # fortran compiler
-FF=     g++
+FF=     gfortran
 
 .SUFFIXES:	.o .cpp .h .f
 .PRECIOUS:	.cpp .h .f libsoft.a
@@ -25,9 +25,9 @@ CFLAGS= -I. -L. $(DEBUG) $(OPT)
 	$(CC) -c $(CFLAGS) $<
 	ar r $@ $*.o; rm $*.o
 .f.o:
-	$(CC) $(OPT) -c $< 
+	$(FF) $(OPT) -c $< 
 .f.a:
-	$(CC) $(OPT) -c $< 
+	$(FF) $(OPT) -c $< 
 	ar r $@ $*.o; rm $*.o
 
 # Chooses whether to use ranlib - not if your system is a linux one
