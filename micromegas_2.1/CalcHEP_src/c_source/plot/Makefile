@@ -8,7 +8,7 @@ override CFLAGS += -Iinclude $(patsubst %,-I../%/include ,$(Idir))
 
 special = view_tab.c
 
-OBJ= $(subst .c,.o, $(filter-out $(special),$(wildcard *.c)))
+OBJ= $(subst .c,.o,$(filter-out $(special),$(wildcard *.c)))
 
 ../../bin/plot_view:  view_tab.c ../../num_c.a ../../serv.a
 	$(CC) $(CFLAGS) -o $@ $^  $(LX11) -lm

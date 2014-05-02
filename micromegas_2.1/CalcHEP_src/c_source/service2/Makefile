@@ -8,7 +8,7 @@ override CFLAGS += -Iinclude $(patsubst %,-I../%/include ,$(Idir))
 
 special = main_calc.c
 
-OBJ= $(subst .c,.o, $(filter-out $(special),$(wildcard *.c)))
+OBJ= $(subst .c,.o,$(filter-out $(special),$(wildcard *.c)))
 
 all: ../../serv.a  ../../bin/calc
 

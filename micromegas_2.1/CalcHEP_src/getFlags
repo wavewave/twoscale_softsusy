@@ -18,9 +18,9 @@ Linux) CC=gcc
        CFLAGSD=
        SHARED=-shared
        SONAME=
-       FC=g77
+       FC=gfortran
        FFLAGS="-fno-automatic"       
-       lFort=-lg2c
+       lFort=
        CXX=g++
        RANLIB=ranlib
      ;;
