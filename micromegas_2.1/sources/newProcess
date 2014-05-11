@@ -56,6 +56,8 @@ fi
 
 ### clean all and launch CalcHEP
   rm -f results/* tmp/safe
+  mkdir tmp
+  mkdir so_generated
  
   $CALCHEP/bin/s_calchep -blind $2"$model"{{"$4"{"$DelVirtual"{"$EXCLUDE"[{[{{0
 
