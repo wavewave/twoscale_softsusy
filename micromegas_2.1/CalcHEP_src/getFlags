@@ -14,21 +14,21 @@ case `uname` in
 Linux) CC=gcc
 #      CFLAGS="-fsigned-char -Wstrict-prototypes -Wimplicit  -Wmissing-prototypes -Wunused"
        CFLAGS="-fsigned-char"
-       lDL="-rdynamic -ldl"       
+       lDL="-rdynamic -ldl"
        CFLAGSD=
        SHARED=-shared
        SONAME=
        FC=gfortran
-       FFLAGS="-fno-automatic"       
+       FFLAGS="-fno-automatic"
        lFort=
        CXX=g++
        RANLIB=ranlib
      ;;
 
 OSF1)  CC=cc
-       CFLAGS="-std1 -ieee" 
+       CFLAGS="-std1 -ieee"
        FC=f77
-       FFLAGS="-O0 -fpe2" 
+       FFLAGS="-O0 -fpe2"
        FFLAGSD=
        SONAME=-soname
        SHARED=-shared
@@ -50,14 +50,14 @@ SunOS) CC=cc
        RANLIB=ranlib
      ;;
 Darwin)CC=gcc
-       CFLAGS=-fsigned-char
+       CFLAGS="-fsigned-char -Wno-return-type"
        lDL=-ldl
        CFLAGSD=-dynamic
        SHARED=-dynamiclib
        SONAME=
        FC=gfortran
-       FFLAGS= 
-       lFort="-L/sw/lib  -lgfortran"
+       FFLAGS=
+       lFort="-L/sw/lib -L/opt/local/lib -lgfortran"
        CXX=g++
        RANLIB="ranlib -c"
      ;;
@@ -71,7 +71,7 @@ CYGWIN*)
        SO=dll
        FLOCK=-DFLOCK
        FC=g77
-       FFLAGS=-fno-automatic 
+       FFLAGS=-fno-automatic
        lFort=-lg2c
        CXX=g++
        RANLIB="ranlib"
@@ -84,8 +84,8 @@ CYGWIN*)
       lDL=
       SO=so
       RANLIB=ranlib
-      CXX=c++ 
-      echo Unknown Unix  
+      CXX=c++
+      echo Unknown Unix
      ;;
 esac
 if(test -x "`which gmake`") then
@@ -94,30 +94,30 @@ else
     echo OK
     MAKE=make
 fi
- 
+
 }
 
 writeFlags()
 {
 echo "# C compiler
-CC=\"$CC\" 
+CC=\"$CC\"
 
 # Flags for C compiler
 CFLAGS=\"$CFLAGS\"
 
-# Disposition of header files for X11 
+# Disposition of header files for X11
 HX11=$HX11
 
-# Disposition of lX11  
+# Disposition of lX11
 LX11=\"$LX11\"
 
-# Library which supports runtime  loading of shared libraries  
+# Library which supports runtime  loading of shared libraries
 lDL=\"$lDL\"
 
 # Addition flags needed to compile objet files for shared libraries
 CFLAGSD=\"$CFLAGSD\"
 
-# C Flag which forces compilation of  shared library 
+# C Flag which forces compilation of  shared library
 SHARED=\"$SHARED\"
 
 # FLAG to define  "shared_object_name" for shared library
@@ -130,7 +130,7 @@ SO=$SO
 # Cygwin/SunOS accepts  only  flock/lockf .
 FLOCK=$FLOCK
 
-# Flag which defines type of numbers used in symbolic calculations 
+# Flag which defines type of numbers used in symbolic calculations
 # it could be -DNUM_DOUBLE ,  -DNUM_LONG_LONG  -DNUM_LONG
 SNUM=$SNUM
 
@@ -146,14 +146,14 @@ lFort=\"$lFort\"
 # C++ compiler
 CXX=\"$CXX\"
 
-# RANLIB 
+# RANLIB
 RANLIB=\"$RANLIB\"
 
-# MAKE 
-MAKE=$MAKE        
+# MAKE
+MAKE=$MAKE
 
 export CC CFLAGS CFLAGSD lDL LX11 SHARED SONAME SO FC FFLAGS RANLIB CXX lFort MAKE
-" > ../FlagsForSh    
+" > ../FlagsForSh
 }
 
 #MAKE
@@ -164,7 +164,7 @@ CC = $CC
 CFLAGS = $CFLAGS
 HX11 = $HX11
 LX11 = $LX11
-lDL = $lDL 
+lDL = $lDL
 CFLAGSD = $CFLAGSD
 SHARED = $SHARED
 SONAME = $SONAME
@@ -172,11 +172,11 @@ SO = $SO
 FLOCK = $FLOCK
 SNUM = $SNUM
 
-FC = $FC 
+FC = $FC
 FFLAGS = $FFLAGS
 RANLIB = $RANLIB
 lFort = $lFort
-CXX=$CXX    
+CXX=$CXX
 
 CALCHEP = `pwd`
 UNAME = `uname`
@@ -190,20 +190,20 @@ testCC()
 {
 # Testing of C-compiler
 
-if(test ! -x "`which $CC`") then 
+if(test ! -x "`which $CC`") then
   echo Can not find C compiler  $FC
   echo  ... trying  gcc ...
   if(test -x "`which gcc`") then
      CC=gcc
      CFLAGS=-fsigned-char
-  else   
+  else
      echo gcc also is not detected ...
      echo Write down the compile name  and its options in FlagsForSh file.
      echo "     CC=\".....\""
      echo "     CFLAGS=\".....\""
      return 1
   fi
-fi  
+fi
 
 cat >test.c <<EOF
 int main(void)
@@ -218,26 +218,26 @@ $CC -o a.out test.c  1>/dev/null 2>/dev/null
 if(test $? -ne 0)then
   echo  Fatal problem with C compiler.
   return 1
-fi 
+fi
 
 
 $CC -o a.out test.c $CFLAGS 1>/dev/null 2>/dev/null
 if(test $? -ne 0)then
   echo  Wrong compiler options for $CC
   return 1
-fi 
+fi
 
 
 #test for character type
 ./a.out
 if(test $? -ne 0) then
-  echo  C compiler uses unsigned char type. 
+  echo  C compiler uses unsigned char type.
   echo  Improve CFLAGS  in FlagsForSh file to have char signed.
   return  1
-fi 
+fi
 
 echo C compiler detected
-return 0  
+return 0
 
 }
 
@@ -255,15 +255,15 @@ void main(void)
 EOF
 
 $CC -c $HX11 test.c 1>/dev/null 2>/dev/null
-if(test $? -eq 0) then 
+if(test $? -eq 0) then
   $CC -o a.out test.o $LX11  1>/dev/null 2>/dev/null
   if(test $? -eq 0) then
     writeFlags
     echo X11 OK
-    return 0 
-  else 
+    return 0
+  else
     rm -f a.out
-    return 2; 
+    return 2;
   fi
 else return 1
 fi
@@ -279,19 +279,19 @@ cat > Imakefile <<'EOF'
 findx:
 	@echo 'im_incroot="${INCROOT}"; im_usrlibdir="${USRLIBDIR}"; im_libdir="${LIBDIR}"'
 EOF
-  if (xmkmf) >/dev/null 2>/dev/null && test -f Makefile; then 
+  if (xmkmf) >/dev/null 2>/dev/null && test -f Makefile; then
     eval `make findx 2>/dev/null | grep -v make`
     HX11=-I$im_incroot
     LX11="-L$im_usrlibdir -lX11"
     testX11
     err=$?
-  else err=3; fi 
+  else err=3; fi
   if(test -f makefile.bak) then mv makefile.bak makefile; else rm -f makefile; fi
   if(test -f Makefile.bak) then mv Makefile.bak Makefile; else rm -f Makefile; fi
-  rm -f Imakefile 
+  rm -f Imakefile
 
   if (test $err -eq 0 ) then return 0; fi
-   
+
   echo "      fails"
   echo search X11 according to list of possible distinations
 
@@ -312,7 +312,7 @@ XLIST="X11R7/Z X11R6/Z X11R5/Z X11R4/Z  Z/X11R7 Z/X11R6 Z/X11R5 Z/X11R4
       test_dir=/usr/`echo $dir|sed s/Z/lib/`
       LX11="-L$test_dir -lX11"
       testX11
-      if(test $? -eq 0) then 
+      if(test $? -eq 0) then
          writeFlags
          echo X11 ok
          return 0
@@ -321,38 +321,38 @@ XLIST="X11R7/Z X11R6/Z X11R5/Z X11R4/Z  Z/X11R7 Z/X11R6 Z/X11R5 Z/X11R4
   done
   echo "      fails"
   return 1
-} 
+}
 
 testFC()
-{  
+{
 cat >test.f <<EOF
-C     TEST     
+C     TEST
       WRITE(*,*) 'test program'
       END
 EOF
 
-  if(test ! -x "`which $FC`") then 
+  if(test ! -x "`which $FC`") then
      echo Can not find Fortran compiler  $FC
- 
+
       if(test -x "`which gfortran`") then
          echo gfortran is detected!
          FC=gfortran
          FFLAGS=
          lFort=-lgfortran
-      else   
+      else
       if(test -x "`which g77`") then
-         echo g77 is detected! 
+         echo g77 is detected!
          FC=g77
          FFLAGS=-fno-automatic
          lFort=-lg2c
-      else   
+      else
       if(test -x "`which f77`") then
-         echo f77 is detected! 
+         echo f77 is detected!
          FC=f77
          echo default compiler flags are used for F77
          FFLAGS=
          lFort=
-      else    
+      else
           echo Write down the compile name  and its options in FlagsForSh file.
           echo "     FC=\".....\""
           echo "     FFLAGS=\".....\""
@@ -360,34 +360,34 @@ EOF
       fi
       fi
       fi
-  fi  
+  fi
   echo Fortran compiler is detected
 
   $FC  -o a.out test.f  1>/dev/null 2>/dev/null
   if(test $? -ne 0) then
     echo Fatal problem in  fortran compiler
     return 1
-  else 
+  else
     echo $FC OK
-  fi 
+  fi
 
 
   $FC $FFLAGS -o a.out test.f  1>/dev/null 2>/dev/null
   if(test $? -ne 0) then
     echo Unrecognized flags of fortran compiler
-    echo improve FFLAGS in calchep/FlagsForSh 
+    echo improve FFLAGS in calchep/FlagsForSh
     return 1
-  else 
+  else
     echo FFLAGS OK
-  fi 
-  rm -f a.out 
+  fi
+  rm -f a.out
   return 0
 }
 
 checklFort()
 {
 cat >test.f <<EOF
-C     TEST     
+C     TEST
       INTEGER FUNCTION XXXX()
       WRITE(*,*) 'test program'
       XXXX=5
@@ -411,15 +411,15 @@ if(test $? -ne 0) then
    lFort=
    return 1
 fi
-return 0  
+return 0
 }
 
 checkNUM()
-{ 
-# check  of user defined  interger  type for symbolic calculation 
-if(test -z "$SNUM") then 
+{
+# check  of user defined  interger  type for symbolic calculation
+if(test -z "$SNUM") then
    SNUM=OFF
-fi 
+fi
 
 
 if(test $SNUM = "-DNUM_LONG_LONG" -o $SNUM = "OFF"  ) then
@@ -431,7 +431,7 @@ if(test $SNUM = "-DNUM_LONG_LONG" -o $SNUM = "OFF"  ) then
   else
     if(test $SNUM = "OFF") then
     ./a.out
-      if(test $? -ge 8) then 
+      if(test $? -ge 8) then
         SNUM=-DNUM_LONG_LONG
       fi
     fi
@@ -440,8 +440,8 @@ fi
 
 
 if(test "$SNUM" = "OFF") then
-# selection of integer type for symbolic calculation 
- 
+# selection of integer type for symbolic calculation
+
   echo "void main(void){exit(sizeof(long ));}" >test.c
 
   $CC -o a.out test.c 1>/dev/null 2>/dev/null
@@ -468,22 +468,22 @@ void xxx(void)
   for(i=0;i<10;i++) DP[i]=0;
 }
 EOF
-                                                                                
+
 $CC $CFLAGS $SHARED -o test.$SO  test.c  1>/dev/null 2>/dev/null
 if(test $? -ne 0) then
   echo can not generate shared  library
-  if(test $CC = gcc) then 
-     echo tring to add -fPIC option 
+  if(test $CC = gcc) then
+     echo tring to add -fPIC option
      CFLAGS="$CFLAGS -fPIC"
      $CC $CFLAGS $SHARED -o test.$SO  test.c  1>/dev/null 2>/dev/null
      if(test $? -ne 0) then
-       echo .. it does not help 
+       echo .. it does not help
        return 1
-     else 
+     else
        writeFlags
-     fi   
+     fi
   fi
-fi   
+fi
 
 echo : shared liblary generation OK
 return 0
@@ -497,29 +497,29 @@ cd fTest
 
 if(test -r ../FlagsForSh) then
   . ../FlagsForSh
-else 
+else
   defaultFlags
-  writeFlags  
+  writeFlags
 fi
 
 testCC;  if(test $? -ne 0  ) then  exit 1; fi
 
 testSO;  if(test $? -ne 0  ) then  exit 1; fi
 
-if(test -z "$LX11") then 
-  echo You have empty LX11 paremeter that means that 
-  echo calchep will be compiled for  "Blind" job only.  
-else 
+if(test -z "$LX11") then
+  echo You have empty LX11 paremeter that means that
+  echo calchep will be compiled for  "Blind" job only.
+else
  testX11
- if(test $? -ne 0) then 
-    echo   Trying to detect X11 
+ if(test $? -ne 0) then
+    echo   Trying to detect X11
     findX11
     if(test $? -ne 0) then
        echo X11 not detected. CalcHEP will be compiled in Blind mode
        LX11=
        writeFlags
-    fi    
- fi 
+    fi
+ fi
 fi
 
 checkNUM

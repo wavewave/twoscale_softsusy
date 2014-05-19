@@ -1,12 +1,18 @@
- 
+
 # Makefile for SOFTSUSY library and test program
-# Ben Allanach 
+# Ben Allanach
 
 .KEEP_STATE:
 
-# Choose your c++ compiler here: if you want to use the link to fortran, 
+# Choose your c++ compiler here: if you want to use the link to fortran,
 # it's probably going to have to be g++ on linux
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
 CC=	g++
+endif
+ifeq ($(UNAME_S),Darwin)
+CC= g++ -rdynamic -Qunused-arguments
+endif
 # fortran compiler
 FF=     gfortran
 
@@ -14,10 +20,16 @@ FF=     gfortran
 .PRECIOUS:	.cpp .h .f libsoft.a
 
 #Optimisation level, eg: -O2 -march=i686, speeds by a factor of 2 on my machine
-OPT= -I$(CURDIR)/micromegas_2.1/sources/ -I$(CURDIR)/micromegas_2.1/MSSM/lib  -fsigned-char -Wstrict-prototypes -Wimplicit -Wmissing-prototypes -Wunused -rdynamic
+OPT= -I$(CURDIR)/micromegas_2.1/sources/ -I$(CURDIR)/micromegas_2.1/MSSM/lib  -fsigned-char -Wstrict-prototypes -Wimplicit -Wmissing-prototypes -Wunused
+ifeq ($(UNAME_S),Linux)
+OPT += -rdynamic
+endif
 #OR debug level: -g(n=1,2,3)
 DEBUG=
 CFLAGS= -I. -L. $(DEBUG) $(OPT)
+ifeq ($(UNAME_S),Darwin)
+CFLAGS += -I/opt/local/include -L/opt/local/lib
+endif
 
 .cpp.o:
 	$(CC) -c $(CFLAGS) $<
@@ -25,9 +37,9 @@ CFLAGS= -I. -L. $(DEBUG) $(OPT)
 	$(CC) -c $(CFLAGS) $<
 	ar r $@ $*.o; rm $*.o
 .f.o:
-	$(FF) $(OPT) -c $< 
+	$(FF) $(OPT) -c $<
 .f.a:
-	$(FF) $(OPT) -c $< 
+	$(FF) $(OPT) -c $<
 	ar r $@ $*.o; rm $*.o
 
 # Chooses whether to use ranlib - not if your system is a linux one
@@ -95,8 +107,8 @@ libsoft.a: libsoft.a(rge.o) libsoft.a(utils.o) \
 	libsoft.a(physpars.o) libsoft.a(softpars.o) libsoft.a(twoloophiggs.o)
 	$(RANL)
 
-backup: 
-	uufiles < .backupinstructions; 
+backup:
+	uufiles < .backupinstructions;
 
 softpointscan.o: softpointscan.cpp linalg.h utils.h softsusy.h def.h
 softpointscan3.o: softpointscan3.cpp linalg.h utils.h softsusy.h def.h
@@ -114,11 +126,10 @@ libsoft.a(softpars.o): softpars.cpp softpars.h susy.h def.h linalg.h
 libsoft.a(physpars.o): physpars.cpp physpars.h
 libsoft.a(mycomplex.o): mycomplex.cpp mycomplex.h utils.h
 libsoft.a(utils.o): utils.cpp utils.h linalg.h
-libsoft.a(linalg.o): linalg.cpp linalg.h utils.h 
+libsoft.a(linalg.o): linalg.cpp linalg.h utils.h
 libsoft.a(lowe.o): lowe.cpp lowe.h linalg.h rge.h def.h
 libsoft.a(susy.o): susy.cpp susy.h lowe.h utils.h linalg.h rge.h def.h
 libsoft.a(utils.o): utils.cpp utils.h linalg.h def.h
 libsoft.a(softsusy.o): softsusy.cpp mycomplex.h softsusy.h susy.h lowe.h \
 	linalg.h rge.h def.h utils.h numerics.h softpars.h
 libsoft.a(twoloopshiggs.o): twoloophiggs.f twoloophiggs.h
-
