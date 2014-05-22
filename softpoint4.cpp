@@ -11,6 +11,8 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_roots.h>
 
+#include <gsl/gsl_sf_lambert.h>
+
 //////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 ////                                              ////
@@ -78,7 +80,11 @@ double my_alpha_M0_m32_function( double x, void* params )
   return alpha_M0_m32_function( x, M0, alpha ); 
 }
 
-double find_out_m32_in_mirage( double alpha, double M0 )
+double find_out_m32_in_mirage( double alpha, double M0){  
+  return alpha*M0* gsl_sf_lambert_W0 ( Mpl / (alpha * M0) );
+} 
+
+/* double find_out_m32_in_miragex( double alpha, double M0 )
 {
   int status ; 
   int iter = 0 , max_iter = 100 ;
@@ -126,7 +132,7 @@ double find_out_m32_in_mirage( double alpha, double M0 )
   gsl_root_fsolver_free(s); 
 
   return m32temp ;
-}
+} */
 
 void mirage_simple_BC0( MssmSoftsusy& m, const DoubleVector &pars )
 {
