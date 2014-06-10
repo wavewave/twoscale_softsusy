@@ -20,7 +20,7 @@ SuSpectSRC = $(wildcard SuSpect/*.f)
 
 special = isajetLesH.c
 
-aLibOBJ =  $(subst .c,.o,  $(filter-out  $(special),$(wildcard *.c) )) 
+aLibOBJ =  $(subst .c,.o,$(filter-out  $(special),$(wildcard *.c) )) 
 
 all:  suspect.exe aLib.a 
 

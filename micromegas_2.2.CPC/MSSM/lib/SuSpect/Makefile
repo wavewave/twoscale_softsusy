@@ -10,7 +10,7 @@ all: ../suspect.exe
 ../suspect.exe:  suspect2_call.f suspect.a
 	$(FC) -o ../suspect.exe $(FFLAGS) $^
 
-suspect.a:suspect.a( $(suspectOBJ))
+suspect.a:suspect.a($(suspectOBJ))
 	$(RANLIB) suspect.a
 	rm -f $(suspectOBJ)
 
