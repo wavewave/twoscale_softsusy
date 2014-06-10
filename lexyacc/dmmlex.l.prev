@@ -1,0 +1,43 @@
+%{
+#include <stdio.h>
+#include "dmmyacc.tab.h"
+
+YYSTYPE yylval; 
+/* extern YYSTYPE yylval; */
+%}
+
+%%
+
+(\+|-)?[1-9][0-9]* {yylval.integer = atoi(yytext); 
+printf("INTEGER %f ",yylval.integer); 
+return INTEGER; 
+}
+
+(\+|-)?[1-9][0-9]*(\.[0-9]*)?  {yylval.real = atof(yytext); 
+printf("REAL %f ",yylval.real); 
+return REAL; 
+}
+
+(\+|-)?[1-9]\.[0-9]*E(\+|-)?[0-9]+  {yylval.real = atof(yytext); 
+printf("REAL %f ",yylval.real); 
+return REAL; 
+}
+
+
+
+
+
+\n         printf("ENTER "); return ENTER; 
+
+[ \t]+     /* ignore whitespaces */;
+=     printf("EQUAL"); return EQUAL;
+#.*\\n     printf("COMMENT "); return COMMENT; 
+
+begin      printf("BEGINTASK "); return BEGINTASK; 
+
+single  yylval.string=yytext; printf("DIRECTIVE "); return DIRECTIVE;
+scan    yylval.string=yytext; printf("DIRECTIVE "); return DIRECTIVE;
+rgrun   yylval.string=yytext; printf("DIRECTIVE "); return DIRECTIVE;
+end                 printf("END "); return ENDTASK;
+[a-zA-Z][a-zA-Z0-9]*  printf("VAR "); yylval.string=yytext; return VAR; 
+%%

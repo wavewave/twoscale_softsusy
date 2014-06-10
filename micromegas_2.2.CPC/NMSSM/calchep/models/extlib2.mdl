@@ -1,0 +1,7 @@
+ewsbNMSSM
+Libraries
+External libraries  and citation                                      <|
+../../lib/aLib.a
+../../../sources/micromegas.a
+../../work/work_aux.a  $CALCHEP/lib/model_aux.so
+========================================================================

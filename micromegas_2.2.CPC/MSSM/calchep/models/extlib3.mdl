@@ -1,0 +1,6 @@
+ewsbMSSM
+Libraries
+External libraries                                                  <|
+../../lib/aLib.a ../../../sources/micromegas.a ../../work/work_aux.a
+$CALCHEP/lib/model_aux.$SO
+======================================================================

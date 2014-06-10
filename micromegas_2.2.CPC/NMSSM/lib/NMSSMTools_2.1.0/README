@@ -1,0 +1,242 @@
+HOW TO USE NMSSMTOOLS:
+
+After the download of NMSSMTools_x.tgz (where x is the version
+number), type "tar zxvf NMSSMTools_x.tgz". This will create a directory
+named NMSSMTools_x.
+Go into this directory. 
+There you find the directories 
+-- "sources", "main" and "micromegas_2.0", which contain source files;
+-- "EXPCON", which contains data files corresponding to experimental
+    constraints;
+-- "SAMPLES", which contains sample input and output files; 
+-- "BMPSUGRA" contains mSUGRA-like benchmark points as in
+    A. Djouadi et al., arXiv:0801.4321 [hep-ph];
+-- "BMPGMSB" contains GMSB-like benchmark points as in  
+    U. Ellwanger et al., arXiv:0803.2962 [hep-ph].
+    
+COMPILATION:
+    
+To compile, type first "make init", then "make". A first compilation
+may take a while, since all subroutines of micromegas_2.0 are compiled.
+The following 8 executable routines are created in the directory
+"main": nmhdecay, nmhdecay_rand, nmhdecay_grid, nmspec, nmspec_rand,
+nmspec_grid, nmgmsb and nmgmsb_rand.
+If a subroutine in the directory "sources" was modified, one has to
+type "make init" and "make" again. If a routine in the directory "main"
+was modified, it suffices to type "make" again.
+To delete all the already compiled codes type "make clean".
+
+INPUT FILES:
+
+From the version 2.0.0 onwards, the task to be performed by an input
+file is independent from its name. Any name is allowed, provided it
+contains the three letters "inp"; it can be of the general form
+PREFIXinpSUFFIX where PREFIX and SUFFIX can contain dots etc..
+
+The input file can be located in any directory specified by a PATH.
+
+To run any input file PREFIXinpSUFFIX, type "run PATH/PREFIXinpSUFFIX".
+(PATH is optional; if absent, the input file has to be located in the
+same directory as the script file "run".)
+
+The output files are located in the directory specified by PATH.
+They have the following format: 
+If one single point in the parameter space is evaluated:
+   PREFIXspectrSUFFIX, PREFIXdecaySUFFIX, PREFIXomegaSUFFIX (if the
+   relic density is computed, see below)
+If scans are performed:
+   PREFIXerrSUFFIX as well as PREFIXoutSUFFIX 
+
+However, the task to be performed by an input file must be specified in
+the BLOCK MODSEL at the beginning (see the SLHA2 conventions in 
+B. Allanach et al., SUSY Les Houches Accord 2, arXiv:0801.0045
+[hep-ph]).
+
+The BLOCK MODSEL should contain the following four lines:
+
+BLOCK MODSEL
+	3	1		# NMSSM PARTICLE CONTENT
+	1	I1		# IMOD (0=general NMSSM, 1=mSUGRA, 2=GMSB)
+	10	I2		# ISCAN (0=NO SCAN, 1=GRID, 2=RANDOM)
+	9	I3		# FLAG FOR MICROMEGAS (0=NO, 1=YES)
+
+The meaning of the three integers I1, I2 and I3 is as follows:
+
+I1=0: general NMSSM with parameters specified at the SUSY breaking scale
+      (an average of the squark masses, unless specified by the user).
+      As in the previous versions of NMSSMTools, the input parameters
+      have to be given in the BLOCK EXTPAR following the SLHA2
+      conventions. 
+      Exceptions are as follows:
+      -- The running CP-odd Higgs-doublet mass MA can be specified in
+      the entry 124; then the parameter A_lambda (entry 63) must be
+      omitted.
+      -- The soft squark and slepton masses and trilinear couplings of
+      the first two generations do not have to be specified; then they
+      are identical to those of the third generation. If desired,
+      the soft squark and slepton masses and trilinear couplings of
+      the first two generations can be specified separately. However,
+      the first two generations cannot be treated differently.
+      See the example in SAMPLES/inp.dat.
+
+I1=1: mSUGRA-like boundary conditions at the GUT scale with universal
+      scalar masses M0, gaugino masses M12 and trilinear couplings A0
+      (to be specified in the BLOCK MINPAR).
+      Optionally, the following parameters can be chosen 
+      non-universally: A_kappa, A_lambda, the soft Higgs masses MHD and
+      MHU (the soft singlet mass and kappa are always determined by
+      tan(beta) and M_Z), and any of the gaugino masses M1, M2 and M3.
+      See the example in SAMPLES/inpsp.dat.
+
+I1=2: GMSB-like boundary conditions as in the paper U. Ellwanger et al.,
+      arXiv:0803.2962 [hep-ph]. Note that either the soft singlet mass
+      squared MS (entry 70) or the SUSY breaking tadpole term XiS
+      (entry 67) can be specified; see the corresponding examples in
+      SAMPLES/inpgm.dat.1 and SAMPLES/inpgm.dat.2.
+
+I2=0: One single point in parameter space is evaluated. Detailed
+      informations on the spectrum, mixing angles, the satisfaction of
+      theoretical and experimental constraints are given in the output
+      file PREFIXspectrSUFFIX, detailed informations on the partial
+      decay widths of all six Higgs states in PREFIXdecaySUFFIX.
+      
+I2=1: A scan over a grid in parameter space is performed. The
+      boundaries in parameter space as well as the corresponding
+      numbers of steps have to be specified. 
+      For possible scans in the general NMSSM see the example
+      SAMPLES/gridinp.dat.
+      For possible scans with mSUGRA-like boundary conditions see the
+      example SAMPLES/gridinpsp.dat.
+      Scans on grids with GMSB-like boundary conditions are not yet
+      possible (in contrast to random scans, see below).
+      
+      The output file PREFIXerrSUFFIX gives the number of points which
+      have passed all constraints, and the corresponding range of input
+      parameters.
+      The output file PREFIXoutSUFFIX contains details of points which
+      have passed constraints; the latter can be modified by the user
+      by editing the corresponding routines in the directory "main":
+      
+      The output file PREFIXoutSUFFIX is created in the subroutine
+      OUTPUT near the end of the file nmhdecay_grid.f (general NMSSM)
+      or nmspec_grid.f (mSUGRA). 
+      If the first line in the subroutine OUTPUT reads
+      "IF(IFAIL.EQ.0)THEN", properties of points with phenomenological
+      problems are not written into PREFIXoutSUFFIX.
+      If this line reads "IF(IFAIL.EQ.0 .OR. IFAIL.EQ.10)THEN", points
+      with phenomenological problems are written as well. 
+      The properties which are listed in PREFIXoutSUFFIX depend on the
+      second argument of the array RES(IDIM,I) and should be specified
+      by the user.
+      The meaning of the various arrays containing Higgs and sparticle
+      masses and mixing angles as well as Higgs branching ratios is
+      given at the beginning of the file nmhdecay_grid.f (general
+      NMSSM) or nmspec_grid.f (mSUGRA). For convenience, we list the
+      content of the array PAR(I) (the couplings and soft terms at the
+      SUSY scale) as well as the content of the array PROB(I)
+      (phenomenological and some theoretical constraints) below.
+
+I2=3: A random scan in parameter space is performed. The boundaries in
+      parameter space as well as the total number of steps have to be
+      specified. 
+      For possible scans in the general NMSSM see the example
+      SAMPLES/randinp.dat.
+      For possible scans with mSUGRA-like boundary conditions see the
+      example SAMPLES/randinpsp.dat.
+      For possible scans with GMSB-like boundary conditions see the
+      examples SAMPLES/randinpgm.dat.1 and SAMPLES/randinpgm.dat.2.
+      
+      For the content of the output files PREFIXerrSUFFIX and
+      PREFIXoutSUFFIX (and the treatment of the latter) see the
+      description of the case I2=2 above; the corresponding MAIN
+      routines for random scans in the directory "main" are denoted by
+      nmhdecay_rand.f, nmspec_rand.f and nmgmsb_rand.f.
+      
+I3=0: The dark matter relic density is not computed.
+
+I3=1: The dark matter relic density is computed and checked via a call
+      of micromegas_2. (This option is not possible for GMSB-like
+      boundary conditions. A first call of micromegas provokes the
+      compilation of additional subroutines, which may take a while.)
+      
+      In the case of a single point in parameter space (I2=0), the
+      relic density Omega*h^2 is given in the output files
+      PREFIXspectrSUFFIX as well as PREFIXomegaSUFFIX. The latter
+      contains in addition informations on the decomposition of the LSP
+      and the relevant annihilation/coannihilation processes.
+
+
+************************************************************************
+*  Content of the array PAR(I) (couplings and soft parameters at the
+*  SUSY scale):
+*
+*	PAR(1) = lambda
+*	PAR(2) = kappa
+*	PAR(3) = tan(beta)
+*	PAR(4) = mu (effective mu term = lambda*s)
+*	PAR(5) = Alambda
+*	PAR(6) = Akappa
+*	PAR(7) = mQ3**2
+*	PAR(8) = mU3**2
+*	PAR(9) = mD3**2
+*	PAR(10) = mL3**2
+*	PAR(11) = mE3**2
+*	PAR(12) = AU3
+*	PAR(13) = AD3
+*	PAR(14) = AE3
+*	PAR(15) = mQ**2
+*	PAR(16) = mU**2
+*	PAR(17) = mD**2
+*	PAR(18) = mL**2
+*	PAR(19) = mE**2
+*	PAR(20) = M1
+*	PAR(21) = M2
+*	PAR(22) = M3
+*	PAR(23) = MA
+*       PAR(24) = Amuon
+*
+************************************************************************
+*       Content of the array PROB(I) (violations of phenomenological
+*       and some theoretical constraints):
+*
+*		PROB(I)  = 0, I = 1..37: OK
+*		
+*		PROB(1) =/=0	chargino too light
+*		PROB(2) =/=0	excluded by Z -> neutralinos
+*		PROB(3) =/=0	charged Higgs too light
+*		PROB(4) =/=0	excluded by ee -> hZ 
+*		PROB(5) =/=0	excluded by ee -> hZ, h -> bb
+*		PROB(6) =/=0	excluded by ee -> hZ, h -> tautau
+*		PROB(7) =/=0	excluded by ee -> hZ, h -> invisible 
+*		PROB(8) =/=0	excluded by ee -> hZ, h -> 2jets
+*		PROB(9) =/=0	excluded by ee -> hZ, h -> 2photons
+*		PROB(10) =/=0	excluded by ee -> hZ, h -> AA -> 4bs
+*		PROB(11) =/=0	excluded by ee -> hZ, h -> AA -> 4taus
+*		PROB(12) =/=0	excluded by ee -> hZ, h -> AA -> 2bs 2taus
+*		PROB(13) =/=0	excluded by Z -> hA (Z width)
+*		PROB(14) =/=0	excluded by ee -> hA -> 4bs
+*		PROB(15) =/=0	excluded by ee -> hA -> 4taus
+*		PROB(16) =/=0	excluded by ee -> hA -> 2bs 2taus
+*		PROB(17) =/=0	excluded by ee -> hA -> AAA -> 6bs
+*		PROB(18) =/=0	excluded by ee -> hA -> AAA -> 6taus
+*		PROB(19) =/=0	excluded by ee -> Zh -> ZAA -> Z + light pairs
+*		PROB(20) =/=0	excluded by stop -> b l sneutrino
+*		PROB(21) =/=0	excluded by stop -> neutralino c
+*		PROB(22) =/=0	excluded by sbottom -> neutralino b
+*		PROB(23) =/=0	squark/gluino too light
+*		PROB(24) =/=0	selectron/smuon too light
+*		PROB(25) =/=0	stau too light
+*		PROB(26) = 0	lightest neutralino is not LSP
+*		PROB(27) =/=0	Landau Pole in l, k, ht, hb below MGUT
+*		PROB(28) =/=0	unphysical global minimum
+*		PROB(29) =/=0	Higgs soft masses >> Msusy
+*		PROB(30) =/= 0	excluded by WMAP (checked only if OMGFLAG=1)
+*		PROB(31) =/= 0	eff. Higgs self-couplings in Micromegas > 1
+*		PROB(32) =/= 0	b->s gamma more than 2 sigma away
+*		PROB(33) =/= 0	Delta M_s more than 2 sigma away
+*		PROB(34) =/= 0	Delta M_d more than 2 sigma away
+*		PROB(35) =/= 0	B_s->mu+mu- more than 2 sigma away
+*		PROB(36) =/= 0	B+-> tau+nu_tau more than 2 sigma away
+*		PROB(37) =/= 0	(g-2)_muon more than 2 sigma away
+*
+************************************************************************

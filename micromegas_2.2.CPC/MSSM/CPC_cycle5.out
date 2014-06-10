@@ -1,0 +1,397 @@
+ Spectrum calculator is suspect
+================================================ AP ======
+
+========= mSUGRA scenario =====
+
+=== MASSES OF HIGGS AND SUSY PARTICLES: ===
+
+Higgs masses 
+Mh    = 111.52 
+MHH   = 885.04 
+MH3   = 884.20 
+MHc   = 888.17 
+
+Masses of odd sector Particles:
+~o1  : MNE1  =   248.4 || ~l1  : MSl1  =   257.1 || ~eR  : MSeR  =   258.9 
+~mR  : MSmR  =   258.9 || ~nl  : MSnl  =   411.9 || ~ne  : MSne  =   412.2 
+~nm  : MSnm  =   412.2 || ~eL  : MSeL  =   419.0 || ~mL  : MSmL  =   419.0 
+~l2  : MSl2  =   419.3 || ~1+  : MC1   =   466.8 || ~o2  : MNE2  =   467.0 
+~o3  : MNE3  =   761.4 || ~2+  : MC2   =   775.5 || ~o4  : MNE4  =   776.6 
+~t1  : MSt1  =   952.9 || ~b1  : MSb1  =  1150.7 || ~t2  : MSt2  =  1187.4 
+~b2  : MSb2  =  1188.4 || ~dR  : MSdR  =  1189.2 || ~sR  : MSsR  =  1189.2 
+~uR  : MSuR  =  1193.9 || ~cR  : MScR  =  1193.9 || ~uL  : MSuL  =  1238.8 
+~cL  : MScL  =  1238.8 || ~dL  : MSdL  =  1241.1 || ~sL  : MSsL  =  1241.1 
+~g   : MSG   =  1356.2 || 
+
+==== Calculation of relic density =====
+
+~o1 = 0.997*bino -0.016*wino +0.070*higgsino1 -0.035*higgsino2
+Xf=2.66e+01 Omega=1.26e-01
+=================================== Scalar form factors A
+ proton  SI 9.815E-10   neutron SI 9.983E-10 
+=================================== Scalar form factors B
+ proton  SI 1.815E-09   neutron SI 1.837E-09 
+=================================== Scalar form factors C
+ proton  SI 7.737E-10   neutron SI 7.911E-10 
+=================================== Vector form factors A'
+ proton  SD 3.017E-07   neutron SD 2.509E-07
+=================================== Vector form factors B'
+ proton  SD 2.303E-07   neutron SD 3.337E-07
+
+======== Direct Detection ========
+73Ge: Total number of events=1.92E-04 /day/kg
+Number of events in 10 - 50 KeV region=1.03E-04 /day/kg
+131Xe: Total number of events=3.15E-04 /day/kg
+Number of events in 10 - 50 KeV region=1.59E-04 /day/kg
+================================================ BP ======
+
+========= mSUGRA scenario =====
+
+=== MASSES OF HIGGS AND SUSY PARTICLES: ===
+
+Higgs masses 
+Mh    = 110.97 
+MHH   = 420.69 
+MH3   = 420.49 
+MHc   = 428.35 
+
+Masses of odd sector Particles:
+~o1  : MNE1  =    97.9 || ~l1  : MSl1  =   107.6 || ~eR  : MSeR  =   123.9 
+~mR  : MSmR  =   123.9 || ~nl  : MSnl  =   168.9 || ~ne  : MSne  =   170.8 
+~nm  : MSnm  =   170.8 || ~1+  : MC1   =   183.0 || ~o2  : MNE2  =   183.4 
+~eL  : MSeL  =   187.9 || ~mL  : MSmL  =   187.9 || ~l2  : MSl2  =   192.8 
+~t1  : MSt1  =   362.5 || ~o3  : MNE3  =   395.0 || ~o4  : MNE4  =   410.9 
+~2+  : MC2   =   411.3 || ~b1  : MSb1  =   504.5 || ~b2  : MSb2  =   540.6 
+~dR  : MSdR  =   541.0 || ~sR  : MSsR  =   541.0 || ~uR  : MSuR  =   541.3 
+~cR  : MScR  =   541.3 || ~uL  : MSuL  =   557.9 || ~cL  : MScL  =   557.9 
+~dL  : MSdL  =   563.5 || ~sL  : MSsL  =   563.5 || ~t2  : MSt2  =   582.3 
+~g   : MSG   =   604.8 || 
+
+==== Calculation of relic density =====
+
+~o1 = 0.989*bino -0.048*wino +0.133*higgsino1 -0.046*higgsino2
+Xf=2.46e+01 Omega=1.01e-01
+=================================== Scalar form factors A
+ proton  SI 7.502E-09   neutron SI 7.769E-09 
+=================================== Scalar form factors B
+ proton  SI 1.588E-08   neutron SI 1.626E-08 
+=================================== Scalar form factors C
+ proton  SI 5.491E-09   neutron SI 5.756E-09 
+=================================== Vector form factors A'
+ proton  SD 4.997E-06   neutron SD 4.341E-06
+=================================== Vector form factors B'
+ proton  SD 3.694E-06   neutron SD 5.893E-06
+
+======== Direct Detection ========
+73Ge: Total number of events=3.00E-03 /day/kg
+Number of events in 10 - 50 KeV region=1.64E-03 /day/kg
+131Xe: Total number of events=5.35E-03 /day/kg
+Number of events in 10 - 50 KeV region=2.47E-03 /day/kg
+================================================ CP ======
+
+========= mSUGRA scenario =====
+
+=== MASSES OF HIGGS AND SUSY PARTICLES: ===
+
+Higgs masses 
+Mh    = 112.45 
+MHH   = 576.43 
+MH3   = 576.07 
+MHc   = 581.95 
+
+Masses of odd sector Particles:
+~o1  : MNE1  =   161.7 || ~l1  : MSl1  =   170.5 || ~eR  : MSeR  =   177.8 
+~mR  : MSmR  =   177.8 || ~nl  : MSnl  =   272.9 || ~ne  : MSne  =   273.8 
+~nm  : MSnm  =   273.8 || ~eL  : MSeL  =   284.6 || ~mL  : MSmL  =   284.6 
+~l2  : MSl2  =   286.8 || ~1+  : MC1   =   302.6 || ~o2  : MNE2  =   302.8 
+~o3  : MNE3  =   514.5 || ~2+  : MC2   =   531.1 || ~o4  : MNE4  =   531.3 
+~t1  : MSt1  =   649.9 || ~b1  : MSb1  =   792.3 || ~b2  : MSb2  =   822.5 
+~dR  : MSdR  =   823.5 || ~sR  : MSsR  =   823.5 || ~uR  : MSuR  =   825.8 
+~cR  : MScR  =   825.8 || ~t2  : MSt2  =   842.5 || ~uL  : MSuL  =   854.5 
+~cL  : MScL  =   854.5 || ~dL  : MSdL  =   858.1 || ~sL  : MSsL  =   858.1 
+~g   : MSG   =   932.5 || 
+
+==== Calculation of relic density =====
+
+~o1 = 0.993*bino -0.026*wino +0.103*higgsino1 -0.042*higgsino2
+Xf=2.51e+01 Omega=1.15e-01
+=================================== Scalar form factors A
+ proton  SI 2.476E-09   neutron SI 2.546E-09 
+=================================== Scalar form factors B
+ proton  SI 4.976E-09   neutron SI 5.071E-09 
+=================================== Scalar form factors C
+ proton  SI 1.866E-09   neutron SI 1.937E-09 
+=================================== Vector form factors A'
+ proton  SD 1.968E-06   neutron SD 1.552E-06
+=================================== Vector form factors B'
+ proton  SD 1.561E-06   neutron SD 2.012E-06
+
+======== Direct Detection ========
+73Ge: Total number of events=6.98E-04 /day/kg
+Number of events in 10 - 50 KeV region=3.80E-04 /day/kg
+131Xe: Total number of events=1.18E-03 /day/kg
+Number of events in 10 - 50 KeV region=5.79E-04 /day/kg
+================================================ DP ======
+
+========= mSUGRA scenario =====
+
+=== MASSES OF HIGGS AND SUSY PARTICLES: ===
+
+Higgs masses 
+Mh    = 114.17 
+MHH   = 769.31 
+MH3   = 768.98 
+MHc   = 773.58 
+
+Masses of odd sector Particles:
+~o1  : MNE1  =   207.4 || ~l1  : MSl1  =   213.8 || ~eR  : MSeR  =   223.8 
+~mR  : MSmR  =   223.8 || ~nl  : MSnl  =   344.8 || ~ne  : MSne  =   346.9 
+~nm  : MSnm  =   346.9 || ~l2  : MSl2  =   355.4 || ~eL  : MSeL  =   355.5 
+~mL  : MSmL  =   355.5 || ~o2  : MNE2  =   395.7 || ~1+  : MC1   =   395.7 
+~o3  : MNE3  =   699.9 || ~o4  : MNE4  =   704.9 || ~2+  : MC2   =   706.7 
+~t1  : MSt1  =   774.6 || ~b1  : MSb1  =   958.7 || ~t2  : MSt2  =   998.1 
+~b2  : MSb2  =  1003.2 || ~dR  : MSdR  =  1010.0 || ~sR  : MSsR  =  1010.0 
+~uR  : MSuR  =  1013.5 || ~cR  : MScR  =  1013.5 || ~uL  : MSuL  =  1050.3 
+~cL  : MScL  =  1050.3 || ~dL  : MSdL  =  1053.2 || ~sL  : MSsL  =  1053.2 
+~g   : MSG   =  1146.3 || 
+
+==== Calculation of relic density =====
+
+~o1 = 0.998*bino -0.003*wino -0.068*higgsino1 -0.014*higgsino2
+Xf=2.65e+01 Omega=1.07e-01
+=================================== Scalar form factors A
+ proton  SI 1.902E-11   neutron SI 2.051E-11 
+=================================== Scalar form factors B
+ proton  SI 5.485E-11   neutron SI 5.729E-11 
+=================================== Scalar form factors C
+ proton  SI 1.137E-11   neutron SI 1.272E-11 
+=================================== Vector form factors A'
+ proton  SD 3.603E-07   neutron SD 3.220E-07
+=================================== Vector form factors B'
+ proton  SD 2.607E-07   neutron SD 4.428E-07
+
+======== Direct Detection ========
+73Ge: Total number of events=7.12E-06 /day/kg
+Number of events in 10 - 50 KeV region=3.84E-06 /day/kg
+131Xe: Total number of events=8.52E-06 /day/kg
+Number of events in 10 - 50 KeV region=4.17E-06 /day/kg
+================================================ IP ======
+
+========= mSUGRA scenario =====
+
+=== MASSES OF HIGGS AND SUSY PARTICLES: ===
+
+Higgs masses 
+Mh    = 112.44 
+MHH   = 426.20 
+MH3   = 426.16 
+MHc   = 434.22 
+
+Masses of odd sector Particles:
+~o1  : MNE1  =   141.3 || ~l1  : MSl1  =   152.3 || ~eR  : MSeR  =   225.4 
+~mR  : MSmR  =   225.4 || ~1+  : MC1   =   264.4 || ~o2  : MNE2  =   264.6 
+~nl  : MSnl  =   275.3 || ~ne  : MSne  =   287.4 || ~nm  : MSnm  =   287.4 
+~eL  : MSeL  =   298.0 || ~mL  : MSmL  =   298.0 || ~l2  : MSl2  =   309.5 
+~o3  : MNE3  =   448.7 || ~o4  : MNE4  =   464.4 || ~2+  : MC2   =   465.1 
+~t1  : MSt1  =   581.8 || ~b1  : MSb1  =   677.4 || ~b2  : MSb2  =   730.4 
+~dR  : MSdR  =   747.2 || ~sR  : MSsR  =   747.2 || ~uR  : MSuR  =   748.8 
+~cR  : MScR  =   748.8 || ~t2  : MSt2  =   750.2 || ~uL  : MSuL  =   772.8 
+~cL  : MScL  =   772.8 || ~dL  : MSdL  =   776.8 || ~sL  : MSsL  =   776.8 
+~g   : MSG   =   827.2 || 
+
+==== Calculation of relic density =====
+
+~o1 = 0.992*bino -0.025*wino +0.116*higgsino1 -0.040*higgsino2
+Xf=2.49e+01 Omega=1.13e-01
+=================================== Scalar form factors A
+ proton  SI 1.964E-08   neutron SI 2.050E-08 
+=================================== Scalar form factors B
+ proton  SI 4.409E-08   neutron SI 4.533E-08 
+=================================== Scalar form factors C
+ proton  SI 1.388E-08   neutron SI 1.472E-08 
+=================================== Vector form factors A'
+ proton  SD 3.775E-06   neutron SD 2.891E-06
+=================================== Vector form factors B'
+ proton  SD 3.053E-06   neutron SD 3.693E-06
+
+======== Direct Detection ========
+73Ge: Total number of events=6.08E-03 /day/kg
+Number of events in 10 - 50 KeV region=3.32E-03 /day/kg
+131Xe: Total number of events=1.05E-02 /day/kg
+Number of events in 10 - 50 KeV region=5.11E-03 /day/kg
+================================================ KP ======
+
+========= mSUGRA scenario =====
+
+=== MASSES OF HIGGS AND SUSY PARTICLES: ===
+
+Higgs masses 
+Mh    = 118.58 
+MHH   =1547.62 
+MH3   =1547.61 
+MHc   =1550.20 
+
+Masses of odd sector Particles:
+~o1  : MNE1  =   223.5 || ~1+  : MC1   =   284.1 || ~o2  : MNE2  =   294.4 
+~o3  : MNE3  =   302.0 || ~2+  : MC2   =   479.7 || ~o4  : MNE4  =   479.7 
+~g   : MSG   =  1391.4 || ~t1  : MSt1  =  1729.9 || ~t2  : MSt2  =  2051.6 
+~b1  : MSb1  =  2053.0 || ~l1  : MSl1  =  2129.3 || ~b2  : MSb2  =  2280.5 
+~nl  : MSnl  =  2335.1 || ~l2  : MSl2  =  2336.4 || ~eR  : MSeR  =  2503.5 
+~mR  : MSmR  =  2503.5 || ~ne  : MSne  =  2512.5 || ~nm  : MSnm  =  2512.5 
+~eL  : MSeL  =  2513.8 || ~mL  : MSmL  =  2513.8 || ~dR  : MSdR  =  2684.0 
+~sR  : MSsR  =  2684.0 || ~uR  : MSuR  =  2684.3 || ~cR  : MScR  =  2684.3 
+~uL  : MSuL  =  2692.0 || ~cL  : MScL  =  2692.0 || ~dL  : MSdL  =  2693.2 
+~sL  : MSsL  =  2693.2 || 
+
+==== Calculation of relic density =====
+
+~o1 = 0.893*bino -0.084*wino -0.355*higgsino1 -0.264*higgsino2
+Xf=2.46e+01 Omega=1.01e-01
+=================================== Scalar form factors A
+ proton  SI 9.031E-09   neutron SI 9.015E-09 
+=================================== Scalar form factors B
+ proton  SI 1.437E-08   neutron SI 1.434E-08 
+=================================== Scalar form factors C
+ proton  SI 7.666E-09   neutron SI 7.652E-09 
+=================================== Vector form factors A'
+ proton  SD 1.401E-04   neutron SD 8.702E-05
+=================================== Vector form factors B'
+ proton  SD 1.290E-04   neutron SD 9.914E-05
+
+======== Direct Detection ========
+73Ge: Total number of events=2.41E-03 /day/kg
+Number of events in 10 - 50 KeV region=1.30E-03 /day/kg
+131Xe: Total number of events=3.36E-03 /day/kg
+Number of events in 10 - 50 KeV region=1.67E-03 /day/kg
+================================================ MP ======
+
+========= mSUGRA scenario =====
+
+=== MASSES OF HIGGS AND SUSY PARTICLES: ===
+
+Higgs masses 
+Mh    = 119.23 
+MHH   = 927.45 
+MH3   = 927.44 
+MHc   = 931.30 
+
+Masses of odd sector Particles:
+~o1  : MNE1  =   476.3 || ~l1  : MSl1  =   816.7 || ~1+  : MC1   =   893.3 
+~o2  : MNE2  =   893.3 || ~o3  : MNE3  =  1167.7 || ~eR  : MSeR  =  1169.8 
+~mR  : MSmR  =  1169.8 || ~nl  : MSnl  =  1170.5 || ~2+  : MC2   =  1178.7 
+~o4  : MNE4  =  1178.7 || ~l2  : MSl2  =  1180.1 || ~ne  : MSne  =  1306.8 
+~nm  : MSnm  =  1306.8 || ~eL  : MSeL  =  1309.1 || ~mL  : MSmL  =  1309.1 
+~t1  : MSt1  =  1835.9 || ~b1  : MSb1  =  2033.0 || ~t2  : MSt2  =  2080.1 
+~b2  : MSb2  =  2097.0 || ~dR  : MSdR  =  2322.0 || ~sR  : MSsR  =  2322.0 
+~uR  : MSuR  =  2330.8 || ~cR  : MScR  =  2330.8 || ~uL  : MSuL  =  2404.4 
+~cL  : MScL  =  2404.4 || ~dL  : MSdL  =  2405.6 || ~sL  : MSsL  =  2405.6 
+~g   : MSG   =  2417.3 || 
+
+==== Calculation of relic density =====
+
+~o1 = 0.999*bino -0.004*wino +0.046*higgsino1 -0.020*higgsino2
+Xf=2.46e+01 Omega=1.28e-01
+=================================== Scalar form factors A
+ proton  SI 5.087E-10   neutron SI 5.257E-10 
+=================================== Scalar form factors B
+ proton  SI 1.063E-09   neutron SI 1.086E-09 
+=================================== Scalar form factors C
+ proton  SI 3.752E-10   neutron SI 3.922E-10 
+=================================== Vector form factors A'
+ proton  SD 9.639E-08   neutron SD 6.888E-08
+=================================== Vector form factors B'
+ proton  SD 8.157E-08   neutron SD 8.491E-08
+
+======== Direct Detection ========
+73Ge: Total number of events=5.58E-05 /day/kg
+Number of events in 10 - 50 KeV region=2.96E-05 /day/kg
+131Xe: Total number of events=8.89E-05 /day/kg
+Number of events in 10 - 50 KeV region=4.55E-05 /day/kg
+================================================ NUG ======
+
+========= mSUGRA scenario =====
+
+=== MASSES OF HIGGS AND SUSY PARTICLES: ===
+
+Higgs masses 
+Mh    = 113.70 
+MHH   =1614.29 
+MH3   =1614.18 
+MHc   =1616.49 
+
+Masses of odd sector Particles:
+~o1  : MNE1  =   109.4 || ~1+  : MC1   =   156.7 || ~o2  : MNE2  =   169.9 
+~o3  : MNE3  =   196.8 || ~2+  : MC2   =   292.6 || ~o4  : MNE4  =   293.3 
+~g   : MSG   =   602.6 || ~t1  : MSt1  =   999.3 || ~b1  : MSb1  =  1369.2 
+~t2  : MSt2  =  1375.4 || ~l1  : MSl1  =  1607.3 || ~nl  : MSnl  =  1615.6 
+~l2  : MSl2  =  1617.5 || ~eR  : MSeR  =  1620.9 || ~mR  : MSmR  =  1620.9 
+~ne  : MSne  =  1622.3 || ~nm  : MSnm  =  1622.3 || ~eL  : MSeL  =  1624.1 
+~mL  : MSmL  =  1624.1 || ~b2  : MSb2  =  1640.8 || ~uR  : MSuR  =  1654.6 
+~cR  : MScR  =  1654.6 || ~dR  : MSdR  =  1655.1 || ~sR  : MSsR  =  1655.1 
+~uL  : MSuL  =  1656.4 || ~cL  : MScL  =  1656.4 || ~dL  : MSdL  =  1658.2 
+~sL  : MSsL  =  1658.2 || 
+
+==== Calculation of relic density =====
+
+~o1 = 0.841*bino -0.178*wino +0.430*higgsino1 -0.277*higgsino2
+Xf=2.43e+01 Omega=1.19e-01
+=================================== Scalar form factors A
+ proton  SI 4.690E-08   neutron SI 4.763E-08 
+=================================== Scalar form factors B
+ proton  SI 8.573E-08   neutron SI 8.665E-08 
+=================================== Scalar form factors C
+ proton  SI 3.719E-08   neutron SI 3.795E-08 
+=================================== Vector form factors A'
+ proton  SD 5.106E-04   neutron SD 3.174E-04
+=================================== Vector form factors B'
+ proton  SD 4.700E-04   neutron SD 3.618E-04
+
+======== Direct Detection ========
+73Ge: Total number of events=2.03E-02 /day/kg
+Number of events in 10 - 50 KeV region=1.11E-02 /day/kg
+131Xe: Total number of events=3.16E-02 /day/kg
+Number of events in 10 - 50 KeV region=1.48E-02 /day/kg
+================================================ NUH ======
+
+========= mSUGRA scenario =====
+
+=== MASSES OF HIGGS AND SUSY PARTICLES: ===
+
+Higgs masses 
+Mh    = 115.31 
+MHH   = 497.82 
+MH3   = 497.77 
+MHc   = 504.61 
+
+Masses of odd sector Particles:
+~o1  : MNE1  =   218.6 || ~l1  : MSl1  =   254.4 || ~eR  : MSeR  =   297.0 
+~mR  : MSmR  =   297.0 || ~1+  : MC1   =   404.3 || ~o2  : MNE2  =   404.6 
+~nl  : MSnl  =   424.1 || ~ne  : MSne  =   433.4 || ~nm  : MSnm  =   433.4 
+~l2  : MSl2  =   439.5 || ~eL  : MSeL  =   440.4 || ~mL  : MSmL  =   440.4 
+~o3  : MNE3  =   546.8 || ~2+  : MC2   =   568.9 || ~o4  : MNE4  =   569.0 
+~t1  : MSt1  =   848.2 || ~b1  : MSb1  =  1004.6 || ~t2  : MSt2  =  1049.8 
+~b2  : MSb2  =  1051.6 || ~dR  : MSdR  =  1083.0 || ~sR  : MSsR  =  1083.0 
+~uR  : MSuR  =  1093.3 || ~cR  : MScR  =  1093.3 || ~uL  : MSuL  =  1126.1 
+~cL  : MScL  =  1126.1 || ~dL  : MSdL  =  1128.8 || ~sL  : MSsL  =  1128.8 
+~g   : MSG   =  1212.2 || 
+
+==== Calculation of relic density =====
+
+~o1 = 0.994*bino -0.018*wino +0.101*higgsino1 -0.044*higgsino2
+Xf=2.65e+01 Omega=8.80e-02
+=================================== Scalar form factors A
+ proton  SI 7.653E-09   neutron SI 7.956E-09 
+=================================== Scalar form factors B
+ proton  SI 1.672E-08   neutron SI 1.715E-08 
+=================================== Scalar form factors C
+ proton  SI 5.500E-09   neutron SI 5.798E-09 
+=================================== Vector form factors A'
+ proton  SD 2.226E-06   neutron SD 1.576E-06
+=================================== Vector form factors B'
+ proton  SD 1.894E-06   neutron SD 1.934E-06
+
+======== Direct Detection ========
+73Ge: Total number of events=1.68E-03 /day/kg
+Number of events in 10 - 50 KeV region=9.09E-04 /day/kg
+131Xe: Total number of events=2.79E-03 /day/kg
+Number of events in 10 - 50 KeV region=1.40E-03 /day/kg

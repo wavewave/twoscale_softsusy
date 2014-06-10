@@ -1,0 +1,9 @@
+sugraNMSSM
+Libraries
+External libraries  and citation                                          <|
+../../lib/aLib.a
+../../lib/NMSSMTools_2.1.0/sources/nmhdecay.a
+../../../sources/micromegas.a
+../../work/work_aux.a  $lFort
+$CALCHEP/lib/model_aux.$SO  ../../lib/aLib.a
+============================================================================

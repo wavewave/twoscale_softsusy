@@ -1,0 +1,78 @@
+ Spectrum calculator is suspect
+
+========= mSUGRA scenario =====
+================================================ BP ======
+Omega=1.01e-01
+dMb=5.39E-02   dMd=dMs=8.17E-02 
+================= Tree level 
+ proton  SI 7.939E-09  neutron SI 8.248E-09
+================= QCD        
+ proton  SI 8.188E-09  neutron SI 8.500E-09
+================= dMb        
+ proton  SI 7.253E-09  neutron SI 7.530E-09
+================= QCD+dMb    
+ proton  SI 7.486E-09  neutron SI 7.766E-09
+================= box+QCD+dMb
+ proton  SI 7.501E-09  neutron SI 7.781E-09
+
+========= mSUGRA scenario =====
+================================================ KP ======
+Omega=1.01e-01
+dMb=-9.99E-03   dMd=dMs=-1.68E-02 
+================= Tree level 
+ proton  SI 8.628E-09  neutron SI 8.627E-09
+================= QCD        
+ proton  SI 9.135E-09  neutron SI 9.130E-09
+================= dMb        
+ proton  SI 8.528E-09  neutron SI 8.524E-09
+================= QCD+dMb    
+ proton  SI 9.031E-09  neutron SI 9.024E-09
+================= box+QCD+dMb
+ proton  SI 9.030E-09  neutron SI 9.023E-09
+
+========= mSUGRA scenario =====
+================================================ IP ======
+Omega=1.13e-01
+dMb=1.25E-01   dMd=dMs=1.80E-01 
+================= Tree level 
+ proton  SI 2.493E-08  neutron SI 2.612E-08
+================= QCD        
+ proton  SI 2.555E-08  neutron SI 2.675E-08
+================= dMb        
+ proton  SI 1.913E-08  neutron SI 2.002E-08
+================= QCD+dMb    
+ proton  SI 1.964E-08  neutron SI 2.053E-08
+================= box+QCD+dMb
+ proton  SI 1.964E-08  neutron SI 2.053E-08
+
+========= mSUGRA scenario =====
+================================================ NUH ======
+Omega=8.80e-02
+dMb=7.69E-02   dMd=dMs=1.24E-01 
+================= Tree level 
+ proton  SI 8.740E-09  neutron SI 9.118E-09
+================= QCD        
+ proton  SI 8.983E-09  neutron SI 9.365E-09
+================= dMb        
+ proton  SI 7.438E-09  neutron SI 7.751E-09
+================= QCD+dMb    
+ proton  SI 7.653E-09  neutron SI 7.970E-09
+================= box+QCD+dMb
+ proton  SI 7.653E-09  neutron SI 7.969E-09
+================================================ MSSM1 ======
+The following parapeters keep default values:
+  alfEMZ=7.8181E-03  alfSMZ=1.1720E-01      SW=4.8100E-01      MZ=9.1188E+01
+      Ml=1.7770E+00    MbMb=4.2300E+00     Mtp=1.7140E+02      Au=-1.2106E+03
+      Ad=-1.4122E+03      wt=1.7524E+00      wZ=2.4944E+00      wW=2.0890E+00
+Omega=1.00e-01
+dMb=1.56E-02   dMd=dMs=6.62E-02 
+================= Tree level 
+ proton  SI 1.811E-08  neutron SI 1.905E-08
+================= QCD        
+ proton  SI 1.879E-08  neutron SI 1.975E-08
+================= dMb        
+ proton  SI 1.717E-08  neutron SI 1.806E-08
+================= QCD+dMb    
+ proton  SI 1.783E-08  neutron SI 1.873E-08
+================= box+QCD+dMb
+ proton  SI 1.785E-08  neutron SI 1.875E-08

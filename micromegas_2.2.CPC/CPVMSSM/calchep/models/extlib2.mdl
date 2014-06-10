@@ -1,0 +1,6 @@
+CPV-MSSM/CPSH
+Libraries
+External libraries  and citation                                     <|
+../../lib/aLib.a  ../../lib/mLib.$SO  $CALCHEP/lib/model_aux.$SO
+% cite hep-ph/0604150 and hep-ph/0307377
+=======================================================================

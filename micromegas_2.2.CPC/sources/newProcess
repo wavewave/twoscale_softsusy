@@ -1,0 +1,127 @@
+:
+
+# $1  name of library, $1.so should be generated
+# $2  option
+# $3  way to model
+# $4  Gauge  
+# $5  process name
+# $6  exclude virtual particles
+# $7  list particle to exclude if process contains N*x 
+
+echo PROCESS: $5
+
+# DelVirtualUsr - an option for testing. For example:
+# DelVirtualUsr="Z,h,H,H3,~dL,~dR,~uL,~uR,~sL,~sR,~cL,~cR,~b1,~b2,~t1,~t2"
+DelVirtualUsr=
+
+DelVirtual=$6
+if(test "$DelVirtualUsr") then
+   if(test "$DelVirtual") then
+      DelVirtual="$DelVirtual , $DelVirtualUsr"
+   else 
+      DelVirtual="$DelVirtualUsr"
+   fi
+fi
+
+if(test "$DelVirtual") then 
+   echo Delete diagrams with $DelVirtual
+fi
+
+### define absolute path
+moPTH=`cd ../../../; pwd`
+CALCHEP=$moPTH/CalcHEP_src
+srcPTH=$moPTH/sources
+mdlPTH=`cd ../..; pwd`
+libPTH=$mdlPTH/lib
+workPTH=$mdlPTH/work
+
+export CALCHEP
+
+model=$3
+
+if(test $4 == "F") then 
+    Gauge=
+else 
+    Gauge="[{]"
+fi
+
+
+### check  N*x
+noStar=`echo "$5"|grep -vi '1\*x'|grep -vi '2\*x'|grep -vi '3\*x'` 
+
+if(test -z "$noStar") then 
+#echo number of parameters $#
+   if(test $# -ge 7) then  EXCLUDE="$7"; else EXCLUDE=; fi
+   if(test -n "$EXCLUDE") then
+     echo "         " excluding from final state: $EXCLUDE
+   fi 
+   EXCLUDE="$EXCLUDE{"
+else 
+   EXCLUDE=
+fi 
+
+
+### clean all and launch CalcHEP
+  rm -f results/* tmp/safe
+ 
+  $CALCHEP/bin/s_calchep -blind "$2$model{$Gauge{$5{$DelVirtual{$EXCLUDE[{[{{0"
+
+err=$?
+
+if(test $err -eq 0) then
+  if(test -r results/sqme.c) then 
+    cp $CALCHEP/include/num_in.h $CALCHEP/include/num_out.h $CALCHEP/include/sqme.inc results 
+  else 
+    rm -f results/*
+    cp ../sqme0.c results
+  fi
+elif(test $err -eq 111) then 
+  rm -f results/*
+  cp ../sqme0.c results
+else 
+  exit -1
+fi
+
+
+### check the presence of shared user library
+
+### read compiler flags
+
+. $CALCHEP/FlagsForSh
+
+  cd results
+###  replace external names
+  for FILE in *
+  do 
+     sed  s/_ext/_$1/g $FILE > buff
+     mv buff  $FILE 
+  done 
+
+### compilation
+
+ LIBS=
+ if(test -r $libPTH/mLib.$SO) then  
+    LIBS=$libPTH/mLib.$SO
+ fi
+
+ LIBS="$LIBS $CALCHEP/lib/model_aux.$SO $CALCHEP/lib/sqme_aux.$SO"
+
+  $CC -c $CFLAGS $CFLAGSD *.c 
+  err=$? 
+  if(test $err -eq 0) then
+    $CC $SHARED  $CFLAGSD -o  $1.so *.o $LIBS -lm
+    err=$?
+  fi
+ 
+  if( test $err -eq 0) then
+    if(test `uname` =  "OSF1" ) then
+      ln $1.so  ../../so_generated/$1.so
+       rm $1.so
+    else 
+      link $1.so ../../so_generated/$1.so
+      unlink $1.so
+    fi
+  else 
+    echo "$Process"  problem in compilation!
+    exit -1
+  fi

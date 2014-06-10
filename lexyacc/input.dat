@@ -1,0 +1,23 @@
+method rgrun
+#scanmethod random
+#shots 100
+
+#commnet
+M0 = 1000.0 # GeV Unit
+alpham=  1.0 
+alphag = 0.0
+nM = 0.5
+nH = 1.0
+N5 = 3
+N10= 0
+N24 = 0 
+sgnMu = +1
+tanb = 10.0  #comment
+Mmess = 1.0e10 
+
+
+
+#outputfile "test" #comment
+
+#comment
+
