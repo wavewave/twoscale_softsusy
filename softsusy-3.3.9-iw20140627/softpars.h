@@ -151,6 +151,17 @@ public:
 
   /// Reads in soft SUSY breaking parameters from a file
   void inputSoftParsOnly();
+
+
+  /// by Ian-Woo Kim
+  SoftParsMssm SoftParsMssm_beta2_high() const; 
+
+  void SoftParsMssm_anomalousDeriv_high(
+			   DoubleMatrix & gEE, DoubleMatrix & gLL,
+			   DoubleMatrix & gQQ, DoubleMatrix & gUU,
+			   DoubleMatrix & gDD, 
+			   double & gH1H1, double & gH2H2) const;
+
 };
 
 /// Formatted ouput of whole object

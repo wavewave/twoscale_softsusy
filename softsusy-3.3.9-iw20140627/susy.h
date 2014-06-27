@@ -192,6 +192,27 @@ public:
   /// All matrices should be 3 by 3
   void diagQuarkBasis(DoubleMatrix & vdl, DoubleMatrix & vdr, 
 			  DoubleMatrix & vul, DoubleMatrix & vur) const;
+
+
+  // by Ian-Woo Kim
+  MssmSusy MssmSusy_beta_high(sBrevity & a) const;
+  void MssmSusy_anomalousDimension_high(
+			   DoubleMatrix & gEE, DoubleMatrix & gLL,
+			   DoubleMatrix & gQQ, DoubleMatrix & gUU,
+			   DoubleMatrix & gDD, DoubleVector & dg, 
+			   double & gH1H1, double & gH2H2, 
+			   sBrevity & a) const ;
+
+  void MssmSusy_getOneLpAnom_high(DoubleMatrix & gEE, DoubleMatrix & gLL,
+		    DoubleMatrix & gQQ, DoubleMatrix & gDD,
+		    DoubleMatrix & gUU, double & gH1H1, double &
+		    gH2H2, sBrevity & a) const; 
+
+  void MssmSusy_getTwoLpAnom_high(DoubleMatrix & gEE, DoubleMatrix & gLL,
+		    DoubleMatrix & gQQ, DoubleMatrix & gDD,
+		    DoubleMatrix & gUU, double & gH1H1, double &
+		    gH2H2, sBrevity & a) const; 
+
 };
 /// Formatted output
 ostream & operator <<(ostream &, const MssmSusy &);

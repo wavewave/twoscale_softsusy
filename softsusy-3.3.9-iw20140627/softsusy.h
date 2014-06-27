@@ -540,6 +540,18 @@ public:
 		const DoubleVector & pars, int sgnMu, double tanb,
 		const QedQcd & oneset, bool gaugeUnification, 
 		bool ewsbBCscale =  false); 
+
+  // By Ian-Woo Kim
+  // Driver calculation for two scale models. 
+
+  double lowOrgTwoScale
+    (void (*bcUV)(MssmSoftsusy &, const DoubleVector &),
+     void (*bcThresholdUp)(MssmSoftsusy &, const DoubleVector &),
+     void (*bcThresholdDown)(MssmSoftsusy &, const DoubleVector &),
+     double mxGuess, double mThreshold,
+     const DoubleVector & pars, int sgnMu, double tanb, const QedQcd &
+     oneset, bool gaugeUnification ) ; 
+
   /// Main iteration routine: 
   /// Boundary condition is the theoretical condition on parameters at the high
   /// energy scale mx: the parameters themselves are contained within the
@@ -554,7 +566,34 @@ public:
 							const DoubleVector &), 
 		 const DoubleVector & pars, bool gaugeUnification, 
 		 bool ewsbBCscale);
+
+  /// By Ian-Woo Kim
+  /// Main iteration routine for two scale models 
+  void itLowsoftTwoScale
+    (int maxTries, double & mx, double mThreshold, 
+     int sgnMu, double tol, double tanb, 
+     void (*bcUV)(MssmSoftsusy &, const DoubleVector &), 
+     void (*bcThresholdUp)(MssmSoftsusy &, const DoubleVector &), 
+     void (*bcThresholdDown)(MssmSoftsusy &, const DoubleVector &), 
+     const DoubleVector & pars, bool gaugeUnification );
+
+
   
+  /// By Ian-Woo Kim
+  /// We have two RG running procedure : runtohigh and runtolow, above 
+  /// the threshold and below the threshold, respectively. The signature
+  /// of each routine is the same as orinal runto. 
+
+  int run_low( double from, double to, double eps=-1.0 ) ; 
+  int runto_low( double to, double eps=-1.0 ); 
+  int run_high( double from, double to, double eps=-1.0 ); 
+  int runto_high( double to, double eps=-1.0 ); 
+
+  DoubleVector beta_low() ; 
+  DoubleVector beta_high() ; 
+
+
+
   /// Dummy function to allow users to re-define it in user supplied
   /// objects. Pars will contain necessary parameters to describe high-scale
   /// boundary conditions on SUSY breaking terms
@@ -812,6 +851,34 @@ inline void MssmSoftsusy::doUfb3(double mgut) { setMinpot(ufb3sl(mgut) -
 /// Allows user to specify a boundary condition where ALL SUSY breaking
 /// parameters are specified in inputParameters
 void generalBcs(MssmSoftsusy & m, const DoubleVector & inputParameters);
+
+// Ian-Woo Kim addition for deflected mirage mediation
+struct Dmm_discrete_param { 
+  double N5pair  ; 
+  double nHu, nHd;
+  double nQ, nU, nD, nL, nE; 
+};
+
+extern Dmm_discrete_param dmm_discrete_param ; 
+extern int N5pair ;
+extern int N10pair ; 
+extern int N24;
+
+
+void deflectedmirageBcsUV( MssmSoftsusy & m, const DoubleVector & pars); 
+
+void dmm_Threshold( MssmSoftsusy & m, const DoubleVector & pars,
+		    double& dm1,    double& dm2,    double& dm3,  
+		    double& dmqlsq, double& dmursq, double& dmdrsq, 
+		    double& dmllsq, double& dmersq, 
+		    double& dmhusq, double& dmhdsq ) ;
+
+void deflectedmirageBcsThresholdUp( MssmSoftsusy & m, 
+				    const DoubleVector & pars);
+
+void deflectedmirageBcsThresholdDown( MssmSoftsusy & m, 
+				      const DoubleVector & pars);
+
 /// Prints out header line for print-short output
 void printShortInitialise();
 /// Formatted output
@@ -888,6 +955,19 @@ DoubleVector mhIntegrand(double mh, const DoubleVector & y);
 double lnLHiggs(double mh);
 
 void nonUniGauginos(MssmSoftsusy & m, const DoubleVector & inputParameters);
+
+
+/// by Ian-Woo Kim
+DoubleVector allDerivs_low(double, const DoubleVector &); 
+DoubleVector allDerivs_high(double, const DoubleVector &); 
+
+void setBetas_high(DoubleMatrix & babBeta, DoubleVector &cuBeta, DoubleVector
+		    & cdBeta, DoubleVector & ceBeta, DoubleVector & bBeta) ; 
+
+
+
+double m32func( double alpha, double M0, double m32) ; 
+double find_out_m32_in_mirage(double alpha, double M0, double eps ) ; 
 
 void splitGmsb(MssmSoftsusy & m, const DoubleVector & inputParameters);
 
