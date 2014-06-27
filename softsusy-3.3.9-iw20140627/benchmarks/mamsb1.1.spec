@@ -19,20 +19,20 @@ Block MINPAR               # SUSY breaking input parameters
      1    3.00000000e+02   # m0
      2    4.00000000e+04   # m3/2
 Block EXTPAR               # scale of SUSY breaking BCs
-     0    2.64784730e+16   # MX scale
+     0    2.64784710e+16   # MX scale
 # SOFTSUSY-specific non SLHA information:
-# MIXING=0 Desired accuracy=1.00000000e-03 Achieved accuracy=3.40036437e-04
+# MIXING=0 Desired accuracy=1.00000000e-03 Achieved accuracy=3.40036780e-04
 Block MASS                      # Mass spectrum
 # PDG code     mass             particle
-        24     8.04004782e+01   # MW
+        24     8.04004781e+01   # MW
         25     1.12475812e+02   # h0
         35     7.25678870e+02   # H0
         36     7.25453182e+02   # A0
         37     7.30106589e+02   # H+
    1000021    -8.88554595e+02   # ~g
-   1000022     1.30622296e+02   # ~neutralino(1)
+   1000022     1.30622295e+02   # ~neutralino(1)
    1000023     3.63264100e+02   # ~neutralino(2)
-   1000024     1.30804558e+02   # ~chargino(1)
+   1000024     1.30804557e+02   # ~chargino(1)
    1000025    -7.02189049e+02   # ~neutralino(3)
    1000035     7.10002481e+02   # ~neutralino(4)
    1000037     7.08658535e+02   # ~chargino(2)
@@ -42,12 +42,12 @@ Block MASS                      # Mass spectrum
    1000003     8.80773692e+02   # ~s_L
    1000004     8.77355196e+02   # ~c_L
    1000005     7.66903779e+02   # ~b_1
-   1000006     6.31832898e+02   # ~t_1
+   1000006     6.31832899e+02   # ~t_1
    1000011     2.59783242e+02   # ~e_L
    1000012     2.47229296e+02   # ~nue_L
    1000013     2.59771900e+02   # ~mu_L
    1000014     2.47217424e+02   # ~numu_L
-   1000015     2.25925055e+02   # ~stau_1
+   1000015     2.25925056e+02   # ~stau_1
    1000016     2.43593236e+02   # ~nu_tau_L
    2000001     8.89128060e+02   # ~d_R
    2000002     8.82344979e+02   # ~u_R
@@ -61,14 +61,14 @@ Block MASS                      # Mass spectrum
 Block alpha                     # Effective Higgs mixing parameter
           -1.07945421e-01       # alpha
 Block nmix                  # neutralino mixing matrix
-  1  1    -8.12328327e-03   # N_{1,1}
+  1  1    -8.12328325e-03   # N_{1,1}
   1  2     9.92465905e-01   # N_{1,2}
   1  3    -1.17815803e-01   # N_{1,3}
   1  4     3.26324464e-02   # N_{1,4}
   2  1     9.94606465e-01   # N_{2,1}
   2  2     2.02368568e-02   # N_{2,2}
-  2  3     8.75455497e-02   # N_{2,3}
-  2  4    -5.18095102e-02   # N_{2,4}
+  2  3     8.75455498e-02   # N_{2,3}
+  2  4    -5.18095103e-02   # N_{2,4}
   3  1    -2.62795559e-02   # N_{3,1}
   3  2     6.00278287e-02   # N_{3,2}
   3  3     7.03490453e-01   # N_{3,3}
@@ -104,7 +104,7 @@ Block staumix               # stau mixing matrix
   2  2    -6.14220014e-01   # F_{22}
 Block gauge Q= 6.89368699e+02  # SM gauge couplings
      1     3.61743628e-01   # g'(Q)MSSM DRbar
-     2     6.46140353e-01   # g(Q)MSSM DRbar
+     2     6.46140352e-01   # g(Q)MSSM DRbar
      3     1.07367129e+00   # g3(Q)MSSM DRbar
 Block yu Q= 6.89368699e+02  
   3  3     8.70671659e-01   # Yt(Q)MSSM DRbar
@@ -147,6 +147,6 @@ Block ad Q= 6.89368699e+02
   2  2     1.87472588e+03      # As(Q)MSSM DRbar
   3  3     1.66978225e+03      # Ab(Q)MSSM DRbar
 Block ae Q= 6.89368699e+02  
-  1  1     3.92882703e+02      # Ae(Q)MSSM DRbar
-  2  2     3.92857176e+02      # Amu(Q)MSSM DRbar
-  3  3     3.85348205e+02      # Atau(Q)MSSM DRbar
+  1  1     3.92882702e+02      # Ae(Q)MSSM DRbar
+  2  2     3.92857175e+02      # Amu(Q)MSSM DRbar
+  3  3     3.85348204e+02      # Atau(Q)MSSM DRbar

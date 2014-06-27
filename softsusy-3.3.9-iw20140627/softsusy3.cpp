@@ -479,22 +479,40 @@ double MssmSoftsusy::lowOrgTwoScale
     
     // check to see if there are any negative mass squared scalars: if there
     // are, flag tachyon problem
-    int posi, posj, lspCode; double minmass;
-    lspCode = lsp(minmass, posi, posj); 
-    if (lspCode > 0 && lspCode < 6 && lspCode !=4 && minmass < 0.0) { 
-      flagTachyon(true); 
-      if (PRINTOUT > 2) recogLsp(posi, posj); cout << " tachyonic ";
-    }
+    // int posi, posj, lspCode; double minmass;
+    // lspCode = lsp(minmass, posi, posj); 
+    // if (lspCode > 0 && lspCode < 6 && lspCode !=4 && minmass < 0.0) { 
+    //  flagTachyon(true); 
+    //  if (PRINTOUT > 2) recogLsp(posi, posj); cout << " tachyonic ";
+    // } 
     
   }
   catch(const char *a) {
-    cerr << "Problem: " << a << " pars=" << pars << " tanb=" << tanb 
-	 << " oneset=" << oneset << 
-      endl;
+    ostringstream ii;
+    ii << "SOFTSUSY problem: " << a << " pars=" << pars << " tanb=" << tanb 
+       << " oneset=" << oneset << endl;
+    flagProblemThrown(true);
+    throw(ii.str());
+    // cerr << "Problem: " << a << " pars=" << pars << " tanb=" << tanb 
+	//  << " oneset=" << oneset << 
+    //  endl;
   }
   catch(const string & a) {
-    cerr << "Problem: " << a << " pars=" << pars << " tanb=" << tanb 
+    ostringstream ii;
+    ii << "SOFTSUSY problem: " << a << " pars=" << pars << " tanb=" << tanb 
 	 << " oneset=" << oneset << endl;
+    flagProblemThrown(true);
+    throw ii.str();
+    // cerr << "Problem: " << a << " pars=" << pars << " tanb=" << tanb 
+	//  << " oneset=" << oneset << endl;
+  }
+  catch(...) {
+    ostringstream ii;
+    ii << "SOFTSUSY problem: " << endl;
+    ii << "pars=" << pars << " tanb=" << tanb
+       << " oneset=" << oneset << endl;
+    flagProblemThrown(true);
+    throw ii.str();
   }
 
   return mx;
@@ -530,11 +548,6 @@ void MssmSoftsusy::itLowsoftTwoScale
 
   if (PRINTOUT > 1) cout << displayProblem(); 
 
-  // All problems should be reset since only the ones of the final iteration
-  // should count (sometimes problems disappear). This can mean that problems
-  // only show up as no rho convergence....
-  flagAllProblems(false);
-  
   double mtpole, mtrun;
   
   mtpole = displayDataSet().displayPoleMt();
@@ -612,7 +625,7 @@ void MssmSoftsusy::itLowsoftTwoScale
     bcThresholdDown(*this, pars); 
     err = runto_low( displayMsusy(), eps);
 
-    double c = sumTol(*this, old);    
+    double c = sumTol(*this, old, numTries);    
     
     if (numTries !=0 && c < tol) {///< Accuracy achieved: bail out
       numTries = 0; ///< Reset the number of iterations for the next time
@@ -653,8 +666,8 @@ void MssmSoftsusy::itLowsoftTwoScale
     if (PRINTOUT > 0) cout << " mgut=" << mx << flush;
     
     mtrun = forLoops.mt;
-    if (numTries < 11) rewsb(sgnMu, mtrun);    
-    else rewsb(sgnMu, mtrun, oldMu);    
+    if (numTries < 11) rewsb(sgnMu, mtrun, pars);    
+    else rewsb(sgnMu, mtrun, pars, oldMu);    
     oldMu = displaySusyMu();
 
     if (problem.noMuConvergence) {

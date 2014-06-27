@@ -1,11 +1,11 @@
-OPT=-I../softsusy-3.0.7-iw0630 -I../micromegas_2.2.CPC/sources/ -I../micromegas_2.2.CPC/MSSM/lib  -fsigned-char -Wstrict-prototypes -Wimplicit -Wmissing-prototypes -Wunused -rdynamic
+OPT=-I../softsusy-3.3.9-iw20140627 -I../micromegas_2.2.CPC/sources/ -I../micromegas_2.2.CPC/MSSM/lib  -fsigned-char -Wstrict-prototypes -Wimplicit -Wmissing-prototypes -Wunused -rdynamic
 
 
 
 all: dmmsoftsusy
 
 dmmsoftsusy: dmmsoftsusy.o dmmyacc.tab.o dmmlex.o action.o
-	libtool --mode=link g++ -o dmmsoftsusy dmmsoftsusy.o  dmmyacc.tab.o dmmlex.o action.o  $(CURDIR)/../softsusy-3.0.7-iw0630/libsoft.la $(CURDIR)/../micromegas_2.2.CPC/MSSM/lib/aLib.a $(CURDIR)/../micromegas_2.2.CPC/sources/micromegas.a $(CURDIR)/../micromegas_2.2.CPC/MSSM/work/work_aux.a $(CURDIR)/../micromegas_2.2.CPC/CalcHEP_src/lib/sqme_aux.so $(CURDIR)/../micromegas_2.2.CPC/CalcHEP_src/lib/model_aux.so -lm -ldl 
+	libtool --mode=link g++ -o dmmsoftsusy dmmsoftsusy.o  dmmyacc.tab.o dmmlex.o action.o  $(CURDIR)/../softsusy-3.3.9-iw20140627/libsoft.la $(CURDIR)/../micromegas_2.2.CPC/MSSM/lib/aLib.a $(CURDIR)/../micromegas_2.2.CPC/sources/micromegas.a $(CURDIR)/../micromegas_2.2.CPC/MSSM/work/work_aux.a $(CURDIR)/../micromegas_2.2.CPC/CalcHEP_src/lib/sqme_aux.so $(CURDIR)/../micromegas_2.2.CPC/CalcHEP_src/lib/model_aux.so -lm -ldl 
  
 dmmsoftsusy.o: dmmsoftsusy.cpp
 	g++ -c dmmsoftsusy.cpp $(OPT) 

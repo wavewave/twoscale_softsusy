@@ -38,9 +38,10 @@ extern "C"
 
 /// global variable declaration
 /// no quark mixing (dominant third family approx), and no verbose output
-int MIXING = 0, PRINTOUT = 0;
+/// int MIXING = 0, 
+int PRINTOUT = 0;
 /// fractional accuracy required
-double TOLERANCE = 1.0e-3;
+/// double TOLERANCE = 1.0e-3;
 /// decay constant of muon
 double GMU = 1.16637e-5; 
 /// there are two possible conventions: if QEWSB > MZ, its value is assumed
@@ -217,10 +218,10 @@ bool checkNAN( MssmSoftsusy& m )
 {
   sPhysical p = m.displayPhys(); 
   
-  if( p.mhiggs(1) != p.mhiggs(1) ) return false; 
-  if( p.mhiggs(2) != p.mhiggs(2) ) return false; 
-  if( p.mhiggs(3) != p.mhiggs(3) ) return false; 
-  if( p.mhiggs(4) != p.mhiggs(4) ) return false; 
+  if( p.mh0 != p.mh0 ) return false; 
+  if( p.mA0 != p.mA0 ) return false; 
+  if( p.mH0 != p.mH0 ) return false; 
+  if( p.mHpm != p.mHpm ) return false; 
   if( p.msnu(1)   != p.msnu(1)   ) return false;
   if( p.msnu(2)   != p.msnu(2)   ) return false;
   if( p.msnu(3)   != p.msnu(3)   ) return false;
@@ -242,10 +243,10 @@ void spectrumrecord( ofstream& spectrumfile, MssmSoftsusy& m )
 {
   sPhysical p = m.displayPhys() ;
 
-  spectrumfile << " " << p.mhiggs(1)
-	       << " " << p.mhiggs(2)
-	       << " " << p.mhiggs(3)
-	       << " " << p.mhiggs(4) 
+  spectrumfile << " " << p.mh0
+	       << " " << p.mA0
+	       << " " << p.mH0
+	       << " " << p.mHpm 
 	       << " " << p.msnu(1) 
 	       << " " << p.msnu(2)
 	       << " " << p.msnu(3)
@@ -300,10 +301,10 @@ void scanrecord( ofstream& spectrumfile, param_set& param, MssmSoftsusy& m,
 	       << " " << param.nD
 	       << " " << param.nL
 	       << " " << param.nE
-	       << " " << p.mhiggs(1)
-	       << " " << p.mhiggs(2)
-	       << " " << p.mhiggs(3)
-	       << " " << p.mhiggs(4) 
+	       << " " << p.mh0
+	       << " " << p.mA0
+	       << " " << p.mH0
+	       << " " << p.mHpm 
 	       << " " << p.msnu(1) 
 	       << " " << p.msnu(2)
 	       << " " << p.msnu(3)
@@ -471,10 +472,10 @@ int enterMicrOmegas( QedQcd& q, MssmSoftsusy& m, param_set& param )
   assignVal( "Q" ,  m.displayMu() ); 
 
 
-  assignVal( "MH3" , p.mhiggs(2) ); 
-  assignVal( "Mh"  , p.mhiggs(1) );
-  assignVal( "MHH" , p.mhiggs(3) );
-  assignVal( "MHc" , p.mhiggs(4) ); 
+  assignVal( "MH3" , p.mA0 ); 
+  assignVal( "Mh"  , p.mh0 );
+  assignVal( "MHH" , p.mH0 );
+  assignVal( "MHc" , p.mHpm ); 
 
   assignVal( "tb",   param.tanb );
   assignVal( "alpha" , p.thetaH ); 
@@ -1057,24 +1058,5 @@ int main( int argc, char** argv) {
     } while( !generate_next_lattice_set( param ) );
     scanfile.close(); 
   }
-
-  
-  
-  
-  
-  
-    /// check the point in question is problem free: if so print the output
-    /*  if (!r.displayProblem().test()) 
-	cout << tanb << " " << r.displayPhys().mhiggs.display(1) << " " 
-	<< r.displayPhys().mhiggs.display(2) << " " 
-	<< r.displayPhys().mhiggs.display(3) << " " 
-	<< r.displayPhys().mhiggs.display(4) << endl;
-	else
-	/// print out what the problem(s) is(are)
-	cout << tanb << " " << r.displayProblem() << endl; */
-    
-  
-    
-    
 
 }
