@@ -387,34 +387,47 @@ double find_out_m32_in_mirage( double alpha, double M0, double eps )
   return x; 
 }
 
-
-// Returns low energy softsusy object consistent with BC's m0 etc at MGUT.
-// oneset should be at MZ and contains the SM data to fit the model to.
-// If the running comes into difficulty, eg if a Landau pole is reached, it
-// returns a ZERO object: no result is possible!
-// Boundary condition is the theoretical condition on parameters at the high
-// energy scale mx: the parameters themselves are contained within the vector.
+ 
+/// Returns low energy softsusy object consistent with BC's m0 etc at MGUT.
+/// oneset should be at MZ and contains the SM data to fit the model to.
+/// If the running comes into difficulty, eg if a Landau pole is reached, it
+/// returns a ZERO object: no result is possible!
+/// Boundary condition is the theoretical condition on parameters at the high
+/// energy scale mx: the parameters themselves are contained within the vector.
 double MssmSoftsusy::lowOrgTwoScale
-(void (*bcUV)(MssmSoftsusy &, const DoubleVector &),
+(void (*boundaryCondition)(MssmSoftsusy &, const DoubleVector &),
  void (*bcThresholdUp)(MssmSoftsusy &, const DoubleVector &),
  void (*bcThresholdDown)(MssmSoftsusy &, const DoubleVector &),
  double mxGuess, double mThreshold,
  const DoubleVector & pars, int sgnMu, double tanb, const QedQcd &
- oneset, bool gaugeUnification ) {
+ oneset, bool gaugeUnification) {
 
   double mx = 0.0;
 
   try {
 
-    double muFirst = displaySusyMu(); // Remember initial value
-    
     const static MssmSoftsusy empty;
-    setSoftsusy(empty); // Always starts from an empty object
+
+    double muFirst = displaySusyMu(); /// Remember initial values
+    bool setTbAtMXflag = displaySetTbAtMX(); 
+    bool altFlag = displayAltEwsb();
+    double m32 = displayGravitino();
+    double muCondFirst = displayMuCond();
+    double maCondFirst = displayMaCond();
+
+    setSoftsusy(empty); /// Always starts from an empty object
+    /// These are things that are re-written by the new initialisation
+    setSetTbAtMX(setTbAtMXflag); 
+    if (altFlag) useAlternativeEwsb();
+    setData(oneset); 
     setMw(MW); 
+    setM32(m32);
+    setMuCond(muCondFirst);
+    setMaCond(maCondFirst);
 
     double mz = displayMz();
 
-    // Here all was same
+    /// Here all was same
     if (mxGuess > 0.0) 
       mx = mxGuess; 
     else {
@@ -428,74 +441,82 @@ double MssmSoftsusy::lowOrgTwoScale
 	   << oneset.displayMu() << "\ninstead of " << mz << endl;
     }
     
-    int maxtries = int(-log(TOLERANCE) / log(10.0) * 10);
+    int maxtries = 100; 
     double tol = TOLERANCE;
     
     MssmSusy t(guessAtSusyMt(tanb, oneset));
     
-    t.setLoops(2); // 2 loops should protect against ht Landau pole 
+    t.setLoops(2); /// 2 loops should protect against ht Landau pole 
     t.runto(mx); 
     
     setSusy(t);
-    setData(oneset); 
     
-    // Initial guess: B=0, mu=1st parameter, need better guesses
-    bcUV(*this, pars);
+    /// Initial guess: B=0, 
+    // IWKIM
+    bcUV(*this, pars); // old // boundaryCondition(*this, pars);
+    // END IWKIM
 
-    if (sgnMu == 1 || sgnMu == -1 ) {
-      setSusyMu(sgnMu * 1.0);
-      setM3Squared(0.);
+    if (sgnMu == 1 || sgnMu == -1) { // old // ((sgnMu == 1 || sgnMu == -1) && !ewsbBCscale) {
+      setSusyMu(sgnMu * MZ);
+      setM3Squared(1.0e6);
     }
     else {
-      setSusyMu(muFirst);
-      setM3Squared(muFirst); 
+      if (altEwsb) {
+   	    setSusyMu(displayMuCond());
+	    setM3Squared(displayMaCond());
+      }
+      else {
+	    setSusyMu(muFirst);
+	    setM3Squared(muFirst); 
+      }
     }
-
+    // IWKIM
     run_high(mx, mThreshold) ; 
     bcThresholdDown(*this,pars);
     run_low(mThreshold,mz);
-
-    if (sgnMu == 1 || sgnMu == -1) rewsbTreeLevel(sgnMu); 
+    // END IWKIM
+    // old // run(mx, mz);
     
+    if (sgnMu == 1 || sgnMu == -1) rewsbTreeLevel(sgnMu); 
+      
     physical(0);
     
     setThresholds(3); setLoops(2);
-
+    
+    // IWKIM
     itLowsoftTwoScale(maxtries, mx, mThreshold, sgnMu, tol, tanb, 
 		      bcUV, bcThresholdUp, bcThresholdDown, pars, 
 		      gaugeUnification );
+    // END IWKIM
+
+    // old // itLowsoft(maxtries, mx, sgnMu, tol, tanb, boundaryCondition, pars, 
+	// 	gaugeUnification, ewsbBCscale);
     
     if (displayProblem().nonperturbative 
 	|| displayProblem().higgsUfb || displayProblem().tachyon 
 	|| displayProblem().noRhoConvergence)
       return mx;
-    
+    // IWKIM
     runto_low(maximum(displayMsusy(), MZ));
+    // END IWKIM
+    // old // runto(maximum(displayMsusy(), mz));
+    // old // if (ewsbBCscale) boundaryCondition(*this, pars); 
     
     physical(3);
+
+    // IWKIM
     runto_low(mz);
+    // END IWKIM
+    // old // runto(mz);
     
     if (PRINTOUT) cout << " end of iteration" << endl;
-    
-    // check to see if there are any negative mass squared scalars: if there
-    // are, flag tachyon problem
-    // int posi, posj, lspCode; double minmass;
-    // lspCode = lsp(minmass, posi, posj); 
-    // if (lspCode > 0 && lspCode < 6 && lspCode !=4 && minmass < 0.0) { 
-    //  flagTachyon(true); 
-    //  if (PRINTOUT > 2) recogLsp(posi, posj); cout << " tachyonic ";
-    // } 
-    
   }
-  catch(const char *a) {
+    catch(const char *a) {
     ostringstream ii;
     ii << "SOFTSUSY problem: " << a << " pars=" << pars << " tanb=" << tanb 
        << " oneset=" << oneset << endl;
     flagProblemThrown(true);
     throw(ii.str());
-    // cerr << "Problem: " << a << " pars=" << pars << " tanb=" << tanb 
-	//  << " oneset=" << oneset << 
-    //  endl;
   }
   catch(const string & a) {
     ostringstream ii;
@@ -503,8 +524,6 @@ double MssmSoftsusy::lowOrgTwoScale
 	 << " oneset=" << oneset << endl;
     flagProblemThrown(true);
     throw ii.str();
-    // cerr << "Problem: " << a << " pars=" << pars << " tanb=" << tanb 
-	//  << " oneset=" << oneset << endl;
   }
   catch(...) {
     ostringstream ii;
@@ -514,11 +533,9 @@ double MssmSoftsusy::lowOrgTwoScale
     flagProblemThrown(true);
     throw ii.str();
   }
-
+  
   return mx;
 }
-
-
 
 void MssmSoftsusy::itLowsoftTwoScale
 (int maxTries, double & mx, double mThreshold, 
@@ -539,9 +556,9 @@ void MssmSoftsusy::itLowsoftTwoScale
     cout << "whereas it should be " << mz << endl; 
   }
   
-  if (numTries - 1 > maxTries) {// Iterating too long: bail out
+  if (numTries - 1 > maxTries) {/// Iterating too long: bail out
     flagNoConvergence(true);
-    if (PRINTOUT) cout << "itLowsoft reached maxtries\n"; 
+    if (PRINTOUT) cout << "itLowsoftTwoScale reached maxtries\n"; 
     numTries = 0; 
     return;
   }
@@ -551,33 +568,34 @@ void MssmSoftsusy::itLowsoftTwoScale
   double mtpole, mtrun;
   
   mtpole = displayDataSet().displayPoleMt();
-  // On first iteration, don't bother with finite corrections
+  /// On first iteration, don't bother with finite corrections
   
   numTries = numTries + 1;
-
   try {
-
     sparticleThresholdCorrections(tanb); 
 
-    if (problem.noRhoConvergence) {
-      if (PRINTOUT) cout << "No convergence in rhohat\n"; 
-    }
+    if (problem.noRhoConvergence && PRINTOUT) 
+      cout << "No convergence in rhohat\n"; 
   
-    // precision of running/RGE integration: start off low and increase
+    /// precision of running/RGE integration: start off low and increase
     double eps = maximum(exp(double(- numTries) * log(10.0)), tol * 0.01); 
     
-    // first stab at MSUSY: root(mstop1(MZ) mstop2(MZ))
+    /// first stab at MSUSY: root(mstop1(MZ) mstop2(MZ))
     if (numTries == 1) setMsusy(calcMs()); 
     
-    // initial guess for running top mass 
-    mtrun = mtpole - 20.0;
-    
     int err = 0;
+    // IWKIM
     err = runto_low(mThreshold,eps); 
     bcThresholdUp( (*this), pars ); 
     err = runto_high(mx, eps);
-    
-    // Guard against the top Yukawa fixed point
+    // END IWKIM
+    // old // err = runto(displayMsusy(), eps);
+    double tbIn; double predictedMzSq = 0.;
+    predictedMzSq = predMzsq(tbIn);
+    setPredMzSq(predictedMzSq);  
+    if (!ewsbBCscale) err = runto(mx, eps);
+
+    /// Guard against the top Yukawa fixed point
     if (displayYukawaElement(YU, 3, 3) > 3.0 
 	|| displayYukawaElement(YD, 3, 3) > 3.0 
 	|| displayYukawaElement(YE, 3, 3) > 3.0) {
@@ -588,10 +606,10 @@ void MssmSoftsusy::itLowsoftTwoScale
     }
     
     if (err) {
-      // problem with running: bail out 
-      flagNonperturbative(true);
+      /// problem with running: bail out 
+      flagProblemThrown(true);
       if (PRINTOUT) 
-	cout << "itLowsoft gone non-perturbative approaching mgut\n"; 
+	cout << "itLowsoft can't run more approaching mgut\n"; 
       if (PRINTOUT > 1) printObj();
       numTries = 0; 
       return;
@@ -601,12 +619,12 @@ void MssmSoftsusy::itLowsoftTwoScale
       sBrevity (dummy);
       MssmSusy a(this -> MssmSusy::beta(dummy));
       
-      // Equal gauge couplings: let them and their derivatives set the boundary
-      // condition scale -- linear approximation
+      /// Equal gauge couplings: let them and their derivatives set the boundary
+      /// condition scale -- linear approximation
       mx = mx * exp((displayGaugeCoupling(2) - displayGaugeCoupling(1))
 		    / (a.displayGaugeCoupling(1) - a.displayGaugeCoupling(2)));
 
-      // if mx is too high/low, will likely get non-perturbative problems
+      /// if mx is too high/low, will likely get non-perturbative problems
       if (mx < 1.0e4) {
 	mx = 1.0e4;
 	if (PRINTOUT > 2) cout << " mx too low ";
@@ -618,44 +636,25 @@ void MssmSoftsusy::itLowsoftTwoScale
 	flagMgutOutOfBounds(true);
       }
     }
-    
-    bcUV(*this, pars); 
 
+    // IWKIM    
+    bcUV(*this, pars); 
+    // END IWKIM
+    // old // boundaryCondition(*this, pars); 
+
+    // old // if (!ewsbBCscale) err = runto(displayMsusy(), eps);
+
+    // IWKIM
     err = runto_high(mThreshold, eps) ;
     bcThresholdDown(*this, pars); 
     err = runto_low( displayMsusy(), eps);
-
-    double c = sumTol(*this, old, numTries);    
-    
-    if (numTries !=0 && c < tol) {///< Accuracy achieved: bail out
-      numTries = 0; ///< Reset the number of iterations for the next time
-      if (PRINTOUT > 0) cout << " sT=" << c << " " << flush; 
-      if (displayProblem().test() && PRINTOUT > 0) 
-	cout << " ***problem point***: " << displayProblem() << ".";
-
-      return; 
-    }
-
-    // Old iteration is 'old': these are the parameters by which convergence is
-    // measured. 
-    old.setDrBarPars(displayDrBarPars());
+    // END IWKIM
 
     calcDrBarPars();
 
-    // If a print out is desired, print respectively, the difference with the
-    // last iteration (sum tol or sT), the mu parameter and m3^2 from EWSB, and
-    // the predicted MW and MZ boson masses
-    if (PRINTOUT > 0) 
-      cout << "\nsT=" << c << " mu=" << displaySusyMu() <<  " m3sq=" <<
-	displayM3Squared() << " MWp=" << displayMw() << flush;
-    if (PRINTOUT > 1) {
-      double tb; double MZp = sqrt(fabs(predMzsq(tb)));
-      cout << " MZp=" << MZp << flush;
-    }
-
     if (err) {
       // problem with running: bail out 
-      flagNonperturbative(true);
+      flagProblemThrown(true);
       if (PRINTOUT) cout << "itLowsoft gone non-perturbative on way to MZ\n"; 
       if (PRINTOUT > 1) printObj();
       numTries = 0;
@@ -663,12 +662,52 @@ void MssmSoftsusy::itLowsoftTwoScale
     }
 
     setMsusy(calcMs());
+    if (ewsbBCscale) mx = displayMsusy();
     if (PRINTOUT > 0) cout << " mgut=" << mx << flush;
     
-    mtrun = forLoops.mt;
-    if (numTries < 11) rewsb(sgnMu, mtrun, pars);    
-    else rewsb(sgnMu, mtrun, pars, oldMu);    
+    mtrun = forLoops.mt; ///< This will be at MSUSY
+    //    double tbIn; double predictedMzSq = 0.;
+    if (numTries < 11) {
+      rewsb(sgnMu, mtrun, pars);    
+    }
+    else { ///< After 11 tries, we start averaging old/new mu values
+      double epsi = 0.5;
+      if (numTries > 20) epsi = 0.2;
+      if (numTries > 30) epsi = 0.1;
+      rewsb(sgnMu, mtrun, pars, oldMu, epsi);    
+      } 
+
     oldMu = displaySusyMu();
+
+    fracDiff = sumTol(*this, old, numTries);    
+    
+    if (numTries !=0 && fracDiff < tol) {///< Accuracy achieved: bail out
+      numTries = 0; ///< Reset the number of iterations for the next time
+      if (PRINTOUT > 0) cout << " sT=" << fracDiff << " " << flush; 
+      if (displayProblem().test() && PRINTOUT > 0) 
+	cout << " ***problem point***: " << displayProblem() << ".";
+
+      return; 
+    }
+
+    // All problems should be reset since only the ones of the final iteration
+    // should count (sometimes problems disappear). This can mean that problems
+    // only show up as no rho convergence....
+    tachyonType nil(none);
+    flagAllProblems(false, nil);
+
+    /// Old iteration is 'old': these are the parameters by which convergence is
+    /// measured. 
+    old.setDrBarPars(displayDrBarPars());
+    /// If a print out is desired, print respectively, the difference with the
+    /// last iteration (sum tol or sT), the mu parameter and m3^2 from EWSB, and
+    /// the predicted MW and MZ boson masses
+    if (PRINTOUT > 0) {
+      cout << "\n" << numTries << ". sT=" << fracDiff << " mu=" 
+	   << displaySusyMu() <<  " m3sq=" <<
+	displayM3Squared() << " MWp=" << displayMw() << " Mzp=" 
+	   << sqrt(displayPredMzSq()) << flush;
+    }
 
     if (problem.noMuConvergence) {
       if (PRINTOUT) 
@@ -676,21 +715,29 @@ void MssmSoftsusy::itLowsoftTwoScale
       if (PRINTOUT > 1) printObj();
     }
     
-    err = runto_low(mz, eps);
+    // IWKIM
+    err = runto_low(mz, eps);    
+    // END IWKIM
+    // old // err = runto(mz, eps);
     if (err) {
-      // problem with running: bail out 
-      flagNonperturbative(true);
+      /// problem with running: bail out 
+      flagProblemThrown(true);
       if (PRINTOUT) cout << "itLowsoft gone non-perturbative on way to MZ\n"; 
       if (PRINTOUT > 1) printObj();
-      //    old = MssmSoftsusy();
+      ///    old = MssmSoftsusy();
       numTries = 0;
       return;
     }
     
+    // IWKIM
     itLowsoftTwoScale(maxTries, 
 		      mx, mThreshold, sgnMu, tol, tanb, 
 		      bcUV, bcThresholdUp, bcThresholdDown, 
 		      pars, gaugeUnification);
+    // END IWKIM
+
+    // old // itLowsoft(maxTries, mx, sgnMu, tol, tanb, boundaryCondition, pars, 
+	//      gaugeUnification, ewsbBCscale);
   }
   catch(const char *a) {
     numTries = 0;
