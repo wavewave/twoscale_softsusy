@@ -395,7 +395,7 @@ double find_out_m32_in_mirage( double alpha, double M0, double eps )
 /// Boundary condition is the theoretical condition on parameters at the high
 /// energy scale mx: the parameters themselves are contained within the vector.
 double MssmSoftsusy::lowOrgTwoScale
-(void (*boundaryCondition)(MssmSoftsusy &, const DoubleVector &),
+(void (*bcUV)(MssmSoftsusy &, const DoubleVector &),
  void (*bcThresholdUp)(MssmSoftsusy &, const DoubleVector &),
  void (*bcThresholdDown)(MssmSoftsusy &, const DoubleVector &),
  double mxGuess, double mThreshold,
@@ -584,16 +584,19 @@ void MssmSoftsusy::itLowsoftTwoScale
     if (numTries == 1) setMsusy(calcMs()); 
     
     int err = 0;
+    err = runto_low(displayMsusy(), eps);
+    // old // err = runto(displayMsusy(), eps);
+
+    double tbIn; double predictedMzSq = 0.;
+    predictedMzSq = predMzsq(tbIn);
+    setPredMzSq(predictedMzSq);  
+
     // IWKIM
     err = runto_low(mThreshold,eps); 
     bcThresholdUp( (*this), pars ); 
     err = runto_high(mx, eps);
-    // END IWKIM
-    // old // err = runto(displayMsusy(), eps);
-    double tbIn; double predictedMzSq = 0.;
-    predictedMzSq = predMzsq(tbIn);
-    setPredMzSq(predictedMzSq);  
-    if (!ewsbBCscale) err = runto(mx, eps);
+    // END IWKIM    
+    // old // if (!ewsbBCscale) err = runto(mx, eps);
 
     /// Guard against the top Yukawa fixed point
     if (displayYukawaElement(YU, 3, 3) > 3.0 
@@ -662,7 +665,7 @@ void MssmSoftsusy::itLowsoftTwoScale
     }
 
     setMsusy(calcMs());
-    if (ewsbBCscale) mx = displayMsusy();
+    // old // if (ewsbBCscale) mx = displayMsusy();
     if (PRINTOUT > 0) cout << " mgut=" << mx << flush;
     
     mtrun = forLoops.mt; ///< This will be at MSUSY
