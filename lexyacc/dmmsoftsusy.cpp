@@ -14,6 +14,8 @@
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
+#include <unistd.h>
 
 #include "mycomplex.h"
 #include "def.h"
@@ -601,6 +603,8 @@ int main( int argc, char** argv) {
   char* infilename; 
   char* outfilename; 
   outputCharacteristics(6);
+
+  srand( (unsigned)time(NULL) + (unsigned)getpid() );
 
   cerr << "SOFTSUSY" << SOFTSUSY_VERSION 
        << " test program, Ben Allanach 2002\n";
